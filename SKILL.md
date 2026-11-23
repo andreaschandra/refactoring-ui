@@ -9,7 +9,7 @@ Two modes. Pick one from the request; if both apply, generate first, then critiq
 
 ## Mode A — Generate
 
-1. State the personality in one line (audience → typeface direction, radius, accent, copy tone).
+1. State the personality in one line (audience → typeface direction, radius, accent, copy tone), and put it as a comment at the top of the output (e.g. a CSS comment) so it travels with the file.
 2. Define the system before any markup, as tokens:
    - Spacing and sizing (default scale in `references/layout-spacing.md`), font size (default scale in `references/typography.md`), font weight, line height, color palette in OKLCH (8–10 greys, primary and accent hues with 100–900 shades; see `references/color.md`), shadow, radius, border width.
    - Only use values from these scales.
@@ -23,6 +23,7 @@ Two modes. Pick one from the request; if both apply, generate first, then critiq
 3. Output issues ranked by visual impact:
    `[impact: high|med|low] <issue> → <concrete fix with values>`
 4. End with the 3 changes that would improve it most.
+5. Then a short **Beyond visual design** section: only blocking accessibility or functional issues (missing viewport meta, no landmarks, unlabeled controls, missing focus styles, dead or broken flows). Max ~5 bullets; skip the section if there are none.
 
 ## Routing table
 

@@ -23,7 +23,8 @@
       "[ch4] All-caps labels have added letter-spacing; large headings tightened if the family is wide",
       "[ch5] Palette defined up front in OKLCH with grey + primary + semantic shade scales; no pure black",
       "[ch5] Non-focal colored elements (alerts, badges) use dark text on light tint",
-      "[ch5] No meaning conveyed by color alone (icons/text alongside)"
+      "[ch5] No meaning conveyed by color alone (icons/text alongside)",
+      "[fix] Personality line present as a comment at the top of the file"
     ]
   },
   {
@@ -50,7 +51,8 @@
       "[ch4] All-caps labels have added letter-spacing; large headings tightened if the family is wide",
       "[ch5] Palette defined up front in OKLCH with grey + primary + semantic shade scales; no pure black",
       "[ch5] Non-focal colored elements (alerts, badges) use dark text on light tint",
-      "[ch5] No meaning conveyed by color alone (icons/text alongside)"
+      "[ch5] No meaning conveyed by color alone (icons/text alongside)",
+      "[fix] Personality line present as a comment at the top of the file"
     ]
   },
   {
@@ -78,7 +80,8 @@
       "[ch4] Flags off-scale / near-duplicate font sizes and proposes a type scale",
       "[ch5] Flags color-only signals (e.g. +/− in green/red only) with an icon/text fix",
       "[ch5] Flags scattered one-off colors and proposes a shade-scale palette",
-      "[ch5] Flags contrast failures with ratios and fixes that keep color (flip contrast / rotate hue)"
+      "[ch5] Flags contrast failures with ratios and fixes that keep color (flip contrast / rotate hue)",
+      "[fix] Ends with a short 'Beyond visual design' section for blocking a11y/functional issues"
     ]
   },
   {
@@ -114,7 +117,9 @@
       "[ch5] Flags color-only signals (e.g. +/− in green/red only) with an icon/text fix",
       "[ch5] Flags scattered one-off colors and proposes a shade-scale palette",
       "[ch5] Flags contrast failures with ratios and fixes that keep color (flip contrast / rotate hue)",
-      "[ch5] signup-fixed.html meets the ch5 generate items"
+      "[ch5] signup-fixed.html meets the ch5 generate items",
+      "[fix] Ends with a short 'Beyond visual design' section for blocking a11y/functional issues",
+      "[fix] signup-fixed.html has the personality comment"
     ]
   },
   {
@@ -143,7 +148,8 @@
       "[ch4] Flags off-scale / near-duplicate font sizes and proposes a type scale",
       "[ch5] Flags color-only signals (e.g. +/− in green/red only) with an icon/text fix",
       "[ch5] Flags scattered one-off colors and proposes a shade-scale palette",
-      "[ch5] Flags contrast failures with ratios and fixes that keep color (flip contrast / rotate hue)"
+      "[ch5] Flags contrast failures with ratios and fixes that keep color (flip contrast / rotate hue)",
+      "[fix] Ends with a short 'Beyond visual design' section for blocking a11y/functional issues"
     ]
   }
 ]
