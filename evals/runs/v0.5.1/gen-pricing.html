@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing — Tasklane</title>
+<style>
+  /* ========== System tokens ========== */
+  :root {
+    /* Spacing / sizing scale (px) */
+    --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px;
+    --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px;
+    --w-card: 384px; --w-text: 640px; --w-faq: 768px; --w-page: 1280px;
+
+    /* Type scale (px) */
+    --t-xs: 12px; --t-sm: 14px; --t-base: 16px; --t-lg: 18px; --t-xl: 20px;
+    --t-2xl: 24px; --t-3xl: 30px; --t-4xl: 36px; --t-5xl: 48px;
+
+    /* Weights: normal + bold only */
+    --fw-normal: 400; --fw-bold: 600;
+
+    /* Line heights */
+    --lh-tight: 1.1; --lh-snug: 1.25; --lh-normal: 1.5; --lh-relaxed: 1.625;
+
+    /* Greys — cool (hue 265), near-constant low chroma */
+    --grey-50:  oklch(0.985 0.004 265);
+    --grey-100: oklch(0.965 0.006 265);
+    --grey-200: oklch(0.92  0.010 265);
+    --grey-300: oklch(0.85  0.012 265);
+    --grey-400: oklch(0.72  0.014 265);
+    --grey-500: oklch(0.60  0.016 265);
+    --grey-600: oklch(0.50  0.018 265);
+    --grey-700: oklch(0.40  0.020 265);
+    --grey-800: oklch(0.30  0.020 265);
+    --grey-900: oklch(0.21  0.020 265);
+
+    /* Primary — indigo (hue 275) */
+    --primary-100: oklch(0.96 0.025 275);
+    --primary-200: oklch(0.90 0.055 275);
+    --primary-300: oklch(0.81 0.100 275);
+    --primary-400: oklch(0.68 0.160 275);
+    --primary-500: oklch(0.55 0.200 275);
+    --primary-600: oklch(0.48 0.200 275);
+    --primary-700: oklch(0.41 0.180 275);
+    --primary-800: oklch(0.34 0.145 275);
+    --primary-900: oklch(0.27 0.110 275);
+
+    /* Accent — green (success / "save" signal) */
+    --green-100: oklch(0.96 0.045 155);
+    --green-500: oklch(0.62 0.150 155);
+    --green-800: oklch(0.36 0.090 155);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px oklch(0.21 0.02 265 / 0.06), 0 1px 3px oklch(0.21 0.02 265 / 0.10);
+    --shadow-lg: 0 4px 6px oklch(0.21 0.02 265 / 0.05), 0 12px 24px oklch(0.21 0.02 265 / 0.10),
+                 0 24px 48px oklch(0.27 0.11 275 / 0.12);
+
+    /* Radii & borders */
+    --r-md: 8px; --r-lg: 12px; --r-full: 9999px;
+    --bw-1: 1px; --bw-2: 2px;
+
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  }
+
+  /* ========== Base ========== */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: var(--font);
+    font-size: var(--t-base);
+    line-height: var(--lh-normal);
+    color: var(--grey-900);
+    background: var(--grey-50);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, p, ul { margin: 0; }
+  ul { padding: 0; list-style: none; }
+  a { color: inherit; }
+  :focus-visible { outline: var(--bw-2) solid var(--primary-500); outline-offset: var(--bw-2); }
+
+  .container { max-width: var(--w-page); margin: 0 auto; padding: 0 var(--s-5); }
+
+  /* ========== Shell (minimal) ========== */
+  .site-header { padding: var(--s-5) 0; }
+  .brand {
+    display: inline-flex; align-items: center; gap: var(--s-2);
+    font-weight: var(--fw-bold); font-size: var(--t-lg); color: var(--grey-900); text-decoration: none;
+  }
+  .brand-mark {
+    width: var(--s-6); height: var(--s-6); border-radius: var(--r-md);
+    background: var(--primary-500); display: grid; place-items: center;
+  }
+  .brand-mark svg { width: var(--s-4); height: var(--s-4); }
+
+  /* ========== Hero ========== */
+  .hero { text-align: center; padding: var(--s-8) 0 var(--s-7); }
+  .eyebrow {
+    font-size: var(--t-sm); font-weight: var(--fw-bold); color: var(--primary-600);
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .hero h1 {
+    margin-top: var(--s-3);
+    font-size: var(--t-5xl); line-height: var(--lh-tight); letter-spacing: -0.025em;
+    font-weight: var(--fw-bold);
+  }
+  .hero p {
+    margin: var(--s-4) auto 0; max-width: 32em;
+    font-size: var(--t-lg); line-height: var(--lh-relaxed); color: var(--grey-600);
+  }
+
+  /* ========== Billing toggle ========== */
+  .billing { display: flex; flex-direction: column; align-items: center; gap: var(--s-3); margin-top: var(--s-6); }
+  .toggle {
+    display: inline-flex; padding: var(--s-1); border: 0; margin: 0;
+    background: var(--grey-200); border-radius: var(--r-full);
+  }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .toggle input { position: absolute; opacity: 0; pointer-events: none; }
+  .toggle label {
+    padding: var(--s-2) var(--s-5); border-radius: var(--r-full); cursor: pointer;
+    font-size: var(--t-sm); font-weight: var(--fw-bold); color: var(--grey-600);
+    transition: background-color .15s, color .15s, box-shadow .15s;
+  }
+  .toggle label:hover { color: var(--grey-900); }
+  .toggle input:checked + label { background: white; color: var(--grey-900); box-shadow: var(--shadow-sm); }
+  .toggle input:focus-visible + label { outline: var(--bw-2) solid var(--primary-500); outline-offset: var(--bw-2); }
+  .save-note {
+    display: inline-flex; align-items: center; gap: var(--s-1);
+    font-size: var(--t-sm); color: var(--green-800);
+  }
+  .save-note svg { width: var(--s-4); height: var(--s-4); color: var(--green-500); flex: none; }
+
+  /* ========== Plans ========== */
+  .plans {
+    display: grid; gap: var(--s-5);
+    grid-template-columns: repeat(auto-fit, minmax(256px, var(--w-card)));
+    justify-content: center; align-items: start;
+    padding-bottom: var(--s-9);
+  }
+  .plan {
+    position: relative; display: flex; flex-direction: column;
+    background: white; border: var(--bw-1) solid var(--grey-200); border-radius: var(--r-lg);
+    padding: var(--s-6); box-shadow: var(--shadow-sm);
+  }
+  .plan--featured {
+    border: var(--bw-2) solid var(--primary-500);
+    box-shadow: var(--shadow-lg);
+  }
+  .plan-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-3); }
+  .plan h2 { font-size: var(--t-xl); line-height: var(--lh-snug); font-weight: var(--fw-bold); }
+  .badge {
+    font-size: var(--t-xs); font-weight: var(--fw-bold); text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--primary-800); background: var(--primary-100);
+    padding: var(--s-1) var(--s-3); border-radius: var(--r-full); white-space: nowrap;
+  }
+  .plan-desc { margin-top: var(--s-2); font-size: var(--t-sm); color: var(--grey-600); }
+
+  .price { display: flex; align-items: baseline; gap: var(--s-1); margin-top: var(--s-5); }
+  .price-amount {
+    font-size: var(--t-5xl); line-height: var(--lh-tight); font-weight: var(--fw-bold);
+    letter-spacing: -0.025em; font-variant-numeric: tabular-nums;
+  }
+  .price-unit { font-size: var(--t-sm); color: var(--grey-600); }
+  .price-note { margin-top: var(--s-1); font-size: var(--t-sm); color: var(--grey-600); min-height: 1.5em; }
+
+  .btn {
+    display: block; text-align: center; text-decoration: none;
+    margin-top: var(--s-5); padding: var(--s-3) var(--s-5);
+    font-size: var(--t-base); font-weight: var(--fw-bold); line-height: var(--lh-normal);
+    border-radius: var(--r-md); border: var(--bw-1) solid transparent;
+    transition: background-color .15s, border-color .15s;
+  }
+  .btn--primary { background: var(--primary-500); color: white; box-shadow: var(--shadow-sm); }
+  .btn--primary:hover { background: var(--primary-600); }
+  .btn--secondary { background: white; color: var(--grey-800); border-color: var(--grey-300); }
+  .btn--secondary:hover { background: var(--grey-100); border-color: var(--grey-400); }
+
+  .features { margin-top: var(--s-6); padding-top: var(--s-6); border-top: var(--bw-1) solid var(--grey-200); }
+  .features-title { font-size: var(--t-sm); font-weight: var(--fw-bold); color: var(--grey-900); }
+  .features ul { margin-top: var(--s-4); display: grid; gap: var(--s-3); }
+  .features li { display: flex; gap: var(--s-3); font-size: var(--t-sm); line-height: var(--lh-normal); color: var(--grey-700); }
+  .features svg { width: var(--s-5); height: var(--s-5); flex: none; color: var(--primary-500); margin-top: -1px; }
+
+  /* ========== FAQ ========== */
+  .faq { background: white; border-top: var(--bw-1) solid var(--grey-200); padding: var(--s-9) 0; }
+  .faq-inner { max-width: var(--w-faq); margin: 0 auto; }
+  .faq h2 { font-size: var(--t-3xl); line-height: var(--lh-snug); font-weight: var(--fw-bold); letter-spacing: -0.01em; }
+  .faq-intro { margin-top: var(--s-3); color: var(--grey-600); max-width: 35em; }
+  .faq-intro a { color: var(--primary-600); font-weight: var(--fw-bold); text-underline-offset: 3px; }
+  .faq-list { margin-top: var(--s-7); border-top: var(--bw-1) solid var(--grey-200); }
+  .faq details { border-bottom: var(--bw-1) solid var(--grey-200); }
+  .faq summary {
+    display: flex; justify-content: space-between; align-items: center; gap: var(--s-5);
+    padding: var(--s-5) 0; cursor: pointer; list-style: none;
+    font-size: var(--t-lg); font-weight: var(--fw-bold); line-height: var(--lh-snug); color: var(--grey-900);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary:hover { color: var(--primary-700); }
+  .faq summary svg { width: var(--s-5); height: var(--s-5); flex: none; color: var(--grey-500); transition: transform .2s; }
+  .faq details[open] summary svg { transform: rotate(180deg); }
+  .faq details p {
+    padding-bottom: var(--s-5); max-width: 35em;
+    color: var(--grey-600); line-height: var(--lh-relaxed);
+  }
+
+  .site-footer { padding: var(--s-6) 0; font-size: var(--t-sm); color: var(--grey-600); text-align: center; }
+
+  /* ========== Responsive ========== */
+  @media (max-width: 640px) {
+    .container { padding: 0 var(--s-4); }
+    .hero { padding: var(--s-7) 0 var(--s-6); }
+    .hero h1 { font-size: var(--t-3xl); }
+    .hero p { font-size: var(--t-base); }
+    .plan { padding: var(--s-5); }
+    .price-amount { font-size: var(--t-4xl); }
+    .plans { padding-bottom: var(--s-8); grid-template-columns: 1fr; }
+    .faq { padding: var(--s-8) 0; }
+    .faq h2 { font-size: var(--t-2xl); }
+    .faq-list { margin-top: var(--s-6); }
+    .faq summary { font-size: var(--t-base); }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="#" aria-label="Tasklane home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M3 4h10M3 8h7M3 12h4"/></svg>
+      </span>
+      Tasklane
+    </a>
+  </div>
+</header>
+
+<main>
+  <section class="hero container" aria-labelledby="pricing-title">
+    <p class="eyebrow">Pricing</p>
+    <h1 id="pricing-title">Plans that grow with your team</h1>
+    <p>Start free with unlimited tasks. Upgrade when you need timelines, automations, and admin controls.</p>
+
+    <div class="billing">
+      <fieldset class="toggle">
+        <legend class="visually-hidden">Billing period</legend>
+        <input type="radio" name="billing" id="bill-monthly" value="monthly">
+        <label for="bill-monthly">Monthly</label>
+        <input type="radio" name="billing" id="bill-annual" value="annual" checked>
+        <label for="bill-annual">Annual</label>
+      </fieldset>
+      <p class="save-note" id="save-note">
+        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3a1 1 0 00-1.4-1.4L9 10.6 7.7 9.3a1 1 0 00-1.4 1.4l2 2a1 1 0 001.4 0l4-4z" clip-rule="evenodd"/></svg>
+        <span>You get 2 months free with annual billing</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="container" aria-label="Plans">
+    <div class="plans">
+
+      <!-- Free -->
+      <article class="plan">
+        <div class="plan-head"><h2>Free</h2></div>
+        <p class="plan-desc">For individuals and small side projects.</p>
+        <div class="price">
+          <span class="price-amount">$0</span>
+          <span class="price-unit">forever</span>
+        </div>
+        <p class="price-note">Up to 3 members</p>
+        <a class="btn btn--secondary" href="#">Get started</a>
+        <div class="features">
+          <p class="features-title">Includes:</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Unlimited tasks and projects</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>List and board views</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>100 MB file storage</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>iOS and Android apps</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Pro (featured) -->
+      <article class="plan plan--featured">
+        <div class="plan-head"><h2>Pro</h2><span class="badge">Most popular</span></div>
+        <p class="plan-desc">For growing teams shipping on deadlines.</p>
+        <div class="price">
+          <span class="price-amount" data-monthly="$12" data-annual="$10">$10</span>
+          <span class="price-unit">per user / month</span>
+        </div>
+        <p class="price-note" data-monthly="Billed monthly" data-annual="$120 per user, billed yearly">$120 per user, billed yearly</p>
+        <a class="btn btn--primary" href="#">Start 14-day free trial</a>
+        <div class="features">
+          <p class="features-title">Everything in Free, plus:</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Unlimited members</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Timeline and Gantt views</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>250 automations per month</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Guest access for clients</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>50 GB file storage</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Team -->
+      <article class="plan">
+        <div class="plan-head"><h2>Team</h2></div>
+        <p class="plan-desc">For organizations that need control and visibility.</p>
+        <div class="price">
+          <span class="price-amount" data-monthly="$24" data-annual="$20">$20</span>
+          <span class="price-unit">per user / month</span>
+        </div>
+        <p class="price-note" data-monthly="Billed monthly" data-annual="$240 per user, billed yearly">$240 per user, billed yearly</p>
+        <a class="btn btn--secondary" href="#">Start 14-day free trial</a>
+        <div class="features">
+          <p class="features-title">Everything in Pro, plus:</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Portfolios and workload view</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Unlimited automations</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>SAML SSO and admin roles</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Audit log and data export</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Priority support, 4-hour response</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="container">
+      <div class="faq-inner">
+        <h2 id="faq-title">Frequently asked questions</h2>
+        <p class="faq-intro">Can’t find what you’re looking for? Email <a href="mailto:sales@tasklane.example">sales@tasklane.example</a> and we’ll reply within one business day.</p>
+
+        <div class="faq-list">
+          <details>
+            <summary>How does the free trial work?<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.3 7.3a1 1 0 011.4 0L10 10.6l3.3-3.3a1 1 0 111.4 1.4l-4 4a1 1 0 01-1.4 0l-4-4a1 1 0 010-1.4z" clip-rule="evenodd"/></svg></summary>
+            <p>Pro and Team both include a 14-day trial with every feature unlocked. No credit card is needed to start. When the trial ends you can pick a paid plan or drop back to Free without losing any of your tasks.</p>
+          </details>
+          <details>
+            <summary>Can I switch between monthly and annual billing?<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.3 7.3a1 1 0 011.4 0L10 10.6l3.3-3.3a1 1 0 111.4 1.4l-4 4a1 1 0 01-1.4 0l-4-4a1 1 0 010-1.4z" clip-rule="evenodd"/></svg></summary>
+            <p>Yes. Switching to annual takes effect right away and we credit the unused part of your current month. Switching to monthly takes effect at the end of your annual term.</p>
+          </details>
+          <details>
+            <summary>How are users counted?<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.3 7.3a1 1 0 011.4 0L10 10.6l3.3-3.3a1 1 0 111.4 1.4l-4 4a1 1 0 01-1.4 0l-4-4a1 1 0 010-1.4z" clip-rule="evenodd"/></svg></summary>
+            <p>You pay for each member of your workspace. Guests, such as clients you invite to a single project, are free and don’t count toward your seats.</p>
+          </details>
+          <details>
+            <summary>What happens to my data if I downgrade?<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.3 7.3a1 1 0 011.4 0L10 10.6l3.3-3.3a1 1 0 111.4 1.4l-4 4a1 1 0 01-1.4 0l-4-4a1 1 0 010-1.4z" clip-rule="evenodd"/></svg></summary>
+            <p>Nothing is deleted. Projects stay intact, but paid features like timelines and automations become read-only until you upgrade again.</p>
+          </details>
+          <details>
+            <summary>Do you offer discounts for nonprofits or education?<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.3 7.3a1 1 0 011.4 0L10 10.6l3.3-3.3a1 1 0 111.4 1.4l-4 4a1 1 0 01-1.4 0l-4-4a1 1 0 010-1.4z" clip-rule="evenodd"/></svg></summary>
+            <p>Yes. Registered nonprofits and accredited schools get 50% off Pro and Team. Email us from your organization’s address to apply.</p>
+          </details>
+          <details>
+            <summary>Which payment methods do you accept?<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.3 7.3a1 1 0 011.4 0L10 10.6l3.3-3.3a1 1 0 111.4 1.4l-4 4a1 1 0 01-1.4 0l-4-4a1 1 0 010-1.4z" clip-rule="evenodd"/></svg></summary>
+            <p>All major credit cards on every paid plan. Annual Team plans can also pay by invoice with net-30 terms.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">Prices in USD. Taxes may apply.</div>
+</footer>
+
+<script>
+  (function () {
+    var radios = document.querySelectorAll('input[name="billing"]');
+    var targets = document.querySelectorAll('[data-monthly][data-annual]');
+    var saveNote = document.getElementById('save-note');
+    function apply(period) {
+      targets.forEach(function (el) { el.textContent = el.dataset[period]; });
+      saveNote.querySelector('span').textContent = period === 'annual'
+        ? 'You get 2 months free with annual billing'
+        : 'Switch to annual billing to get 2 months free';
+    }
+    radios.forEach(function (r) {
+      r.addEventListener('change', function () { if (r.checked) apply(r.value); });
+    });
+  })();
+</script>
+</body>
+</html>

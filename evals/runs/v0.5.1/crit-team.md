@@ -1,0 +1,41 @@
+# Critique: team.html
+
+I checked the page against every item in the refactoring-ui checklist. The member cards are the core feature, but they don't lead the page. The solid indigo banner is the loudest element. Four solid indigo buttons (Invite plus an Edit in every card) compete as the primary action. Inside the cards, bold `Label:` text and five layers of borders bury the actual data. In grayscale, the banner and the dark grey `Remove`/`Filters`/`Export` blocks stand out more than any person's name.
+
+## Issues, ranked by visual impact
+
+### High
+
+- **[impact: high] No single primary action.** "Invite Member" and the three card-level "Edit" buttons are all solid indigo. "Remove", "Filters (0)" and "Export" are solid #6c757d, so a destructive action looks as heavy as a primary one. → Keep **Invite member** as the only solid button (primary-600 background, white text, 8px 16px padding). Make Filters and Export secondary: white background, 1px grey-300 border, grey-700 text. In each card, replace the two full-width buttons with tertiary actions: an "Edit" link in primary-600 at 14px/600 and a `⋯` menu holding "Remove from team". Show the red style only on the confirmation dialog ("Remove Aisha? She'll lose access immediately." with a red-600 confirm button).
+- **[impact: high] The shell outshouts the content, and its subtitle fails contrast.** The banner is a full-bleed #4f46e5 bar with a 32px heading at `line-height: 1.6`. The 25-word subtitle is grey #9ca3af on indigo, about 2.5:1, which is grey text on a colored background. → Remove the colored banner. Use a plain page header on the grey-50 background: "Team" at 24px/700 grey-900 with `line-height: 1.25`, and one short line below it at 14px grey-600 ("Manage who can access your workspace"), capped at `max-width: 60ch`. If you keep a colored banner, the subtitle must be a light tint of the indigo (e.g. `oklch(88% 0.05 275)`), not grey.
+- **[impact: high] The card data is `Label: value` with the labels louder than the values.** `Email:`, `Role:`, `Status:` and `Last active:` are bold grey-900, while the values are regular grey-700. Every row is ruled, and the header has its own divider. → Remove the labels and merge the data into formatted lines:
+  - Name at 16px/600 grey-900, with the job title below at 14px grey-600.
+  - Email at 14px grey-600 below the title. It's an obvious email, so it needs no label.
+  - Role as a small pill next to the name: Admin = primary-100 background with primary-800 text, Member = grey-100 with grey-700, 12px/600, 2px 8px padding.
+  - Status and recency together on one line: "● Active · 2 hours ago" with a green-600 dot, or "● Away · 3 days ago" with an amber-500 dot, at 14px grey-600.
+
+  Drop the `.top` border-bottom and all `li` borders, and separate groups with space instead.
+- **[impact: high] Seat information is said three times, in three tones.** A centered "Woohoo! 🎉" paragraph, a stats table, and the banner copy all cover access and seats. The exclamation tone clashes with the formal admin banner. → Replace the paragraph and the table with one seat meter at the top right of the page header: "6 of 10 seats used" at 14px/600 grey-800, an 8px-tall progress bar (primary-500 fill on a grey-200 track, 9999px radius), and an "Upgrade plan" link at 14px primary-600. If the per-role breakdown matters, show it as a muted line under the bar: "1 admin · 5 members · 0 guests". Copy tone should be plain and calm, with no emoji.
+
+### Medium
+
+- **[impact: med] Implied features and dead ends.** "Filters (0)" opens nothing and announces an empty count. "Upgrade anytime from the billing page" names a page but has no link. The empty state says "No pending invitations" but offers no way to invite. → Label the button "Filter" with no count, and show a count badge only when filters are active, or remove the button until a filter panel exists. Make "Upgrade plan" a real link to billing. Give the empty state a link-style "Invite someone" action that does the same thing as the primary button.
+- **[impact: med] The empty state fails contrast and has no heading.** The text is #9ca3af on #f9fafb, about 2.4:1. A 40px ✉ in #c7d2fe floats under the table with no section title. → Add a section heading, "Pending invitations", at 16px/600 grey-900 with 48px above it. Inside a dashed 1px grey-300 box with 32px padding, show a 24px icon in grey-400, "No pending invitations" at 14px/500 grey-700, and the "Invite someone" link.
+- **[impact: med] Radius personality is incoherent.** The search field is 999px, cards 16px, the stats panel 8px, buttons and badges 4px, and avatars 2px (nearly square). → Pick one style. For this calm admin tool: 8px on cards and panels, 6px on buttons and inputs (including search), 9999px on pills, avatars and dots.
+- **[impact: med] The grid isn't responsive, and nothing has a max-width.** `repeat(3, 1fr)` squeezes cards to about 90px on a phone. On a 2560px monitor the toolbar search and cards stretch edge to edge. → Use `grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))` and wrap the content in `max-width: 1152px; margin: 0 auto; padding: 0 16px` (32px from 768px up). Let the toolbar wrap on narrow screens, and give the search a `max-width: 320px` instead of `flex: 1`.
+- **[impact: med] Groups aren't separated by more space than their contents.** Card padding, card header margin and padding, grid gap, toolbar margin and the stats margin are all 24px, so the stats table reads as a fourth row of the member grid. → Within a card, use 12px between name block and details and 4px between detail lines. Use 24px between cards and 48px between page sections (header → members → invitations). Give the members grid its own heading: "Members", 16px/600, with a grey-500 count "6".
+- **[impact: med] No type scale, and line-height is 1.6 everywhere.** Sizes are 32, 16, 15, 14 and 13 (15/14/13 are near-duplicates). The `th` is 15px, larger than its 14px cells. → Use `12, 14, 16, 20, 24, 30`. Body/UI text 14px with line-height 1.5. Headings at 1.25. Pills 12px. If the table stays, the headers should be 12px/600 grey-500, uppercase with `letter-spacing: .05em`.
+- **[impact: med] Table numbers are left-aligned.** "1 / 10%" and "5 / 50%" don't line up. → If the table is kept, right-align the Members and Seats columns and use `font-variant-numeric: tabular-nums`. "Seats used" should read "1 of 10", not "10%".
+
+### Low
+
+- **[impact: low] The palette is mixed and ad hoc.** It combines Tailwind greys (#374151, #6b7280…) with a Bootstrap grey (#6c757d) of a different temperature, plus hex one-offs. → Define tokens in OKLCH: 9 cool greys (grey-900 `oklch(21% 0.03 265)` to grey-50 `oklch(98.5% 0.003 265)`), a primary indigo scale 100–900 (600 ≈ `oklch(51% 0.23 277)`), and green, amber and red at 100/500/600/800. Use nothing else.
+- **[impact: low] The centered intro paragraph spans the full width.** It is 3 lines of centered text across about 1200px. → Most of it goes away with the seat meter. Any remaining prose should be left-aligned with `max-width: 65ch`.
+- **[impact: low] Avatars are flat initials on one identical tint.** → Make them circles (9999px) and vary the background across 4–5 palette hues at the 100 shade with 700 text, keyed off the name. Use photos when they're available.
+- **[impact: low] Off-scale spacing.** Button padding is 10px 16px and the status pill is 2px 8px. → Use a 4/8/12/16/24/32/48/64 scale: buttons 8px 16px (small 4px 12px), pills 2px 8px allowed as a deliberate micro-step, or 4px 8px.
+
+## The 3 changes that would help most
+
+1. **Fix the action hierarchy.** Keep one solid "Invite member" button, make Filter and Export outline buttons, and move card-level Edit and Remove into a link plus a `⋯` menu, with red only on the confirmation step.
+2. **Let the people lead.** Replace the indigo banner with a quiet "Team" header plus a seat meter. Strip the `Label:` rows and borders from the cards in favour of name → title/email → role pill → "● Active · 2 hours ago".
+3. **Systematize and make it responsive.** Use one radius style, a 12–30px type scale, the 4–64 spacing scale with 48px between sections, OKLCH tokens, an `auto-fill` grid and a max-width container. Fix the two contrast failures (banner subtitle, empty state) while doing this.
