@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Account settings</title>
+<style>
+/*
+  Personality: neutral & trustworthy — general web-app users managing their account →
+  system sans stack, small radius (8px), calm blue primary, cool-tinted greys,
+  plain direct copy ("Save changes", "Delete account").
+*/
+
+/* ===================== System tokens ===================== */
+:root {
+  /* Spacing & sizing (non-linear, base 16) */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+  --size-256: 256px; --size-384: 384px; --size-512: 512px;
+
+  /* Type scale */
+  --fs-12: 12px; --fs-14: 14px; --fs-16: 16px; --fs-18: 18px;
+  --fs-20: 20px; --fs-24: 24px; --fs-30: 30px;
+  --fw-normal: 400; --fw-bold: 600;
+  --lh-heading: 1.25; --lh-body: 1.5; --lh-small: 1.625;
+
+  /* Greys — cool (hue 260), constant low chroma */
+  --grey-50:  oklch(98.5% 0.004 260);
+  --grey-100: oklch(96.5% 0.007 260);
+  --grey-200: oklch(92.5% 0.010 260);
+  --grey-300: oklch(87%   0.012 260);
+  --grey-400: oklch(71%   0.014 260);
+  --grey-500: oklch(55.5% 0.016 260);
+  --grey-600: oklch(46%   0.016 260);
+  --grey-700: oklch(37%   0.016 260);
+  --grey-800: oklch(28%   0.016 260);
+  --grey-900: oklch(21%   0.016 260);
+  --white:    oklch(100% 0 0);
+
+  /* Primary — blue (hue 262) */
+  --primary-100: oklch(96%  0.025 262);
+  --primary-200: oklch(90%  0.055 262);
+  --primary-300: oklch(80%  0.100 262);
+  --primary-400: oklch(68%  0.150 262);
+  --primary-500: oklch(53%  0.200 262);
+  --primary-600: oklch(46%  0.190 262);
+  --primary-700: oklch(39%  0.160 262);
+  --primary-800: oklch(32%  0.130 262);
+  --primary-900: oklch(25%  0.100 262);
+
+  /* Red — destructive / error (hue 27) */
+  --red-100: oklch(96%  0.020 20);
+  --red-200: oklch(90%  0.050 22);
+  --red-300: oklch(81%  0.090 24);
+  --red-400: oklch(68%  0.160 26);
+  --red-500: oklch(56%  0.200 27);
+  --red-600: oklch(49%  0.190 27);
+  --red-700: oklch(42%  0.160 27);
+  --red-800: oklch(35%  0.130 27);
+  --red-900: oklch(27%  0.100 27);
+
+  /* Green — success (hue 150) */
+  --green-100: oklch(96%  0.030 155);
+  --green-300: oklch(83%  0.110 152);
+  --green-500: oklch(60%  0.150 150);
+  --green-700: oklch(44%  0.110 150);
+  --green-900: oklch(29%  0.070 150);
+
+  /* Amber — warning (hue 80 → shifts toward orange as it darkens) */
+  --amber-100: oklch(97%  0.040 90);
+  --amber-300: oklch(87%  0.130 85);
+  --amber-500: oklch(77%  0.160 75);
+  --amber-700: oklch(53%  0.130 60);
+  --amber-900: oklch(36%  0.080 55);
+
+  /* Elevation (two-part, tinted with grey-900) */
+  --shadow-1: 0 1px 3px oklch(21% 0.016 260 / .10), 0 1px 2px oklch(21% 0.016 260 / .16);
+  --shadow-2: 0 4px 6px oklch(21% 0.016 260 / .07), 0 2px 4px oklch(21% 0.016 260 / .06);
+  --shadow-3: 0 5px 15px oklch(21% 0.016 260 / .10), 0 2px 4px oklch(21% 0.016 260 / .05);
+  --shadow-4: 0 10px 24px oklch(21% 0.016 260 / .12), 0 3px 6px oklch(21% 0.016 260 / .04);
+  --shadow-5: 0 15px 35px oklch(21% 0.016 260 / .16), 0 3px 6px oklch(21% 0.016 260 / .03);
+  --shadow-inset: inset 0 2px 2px oklch(21% 0.016 260 / .06);
+
+  /* Radius, border, opacity */
+  --r-4: 4px; --r-8: 8px; --r-full: 9999px;
+  --bw-1: 1px; --bw-2: 2px; --bw-4: 4px;
+  --o-disabled: .5; --o-scrim: .7;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* ===================== Base ===================== */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-16);
+  line-height: var(--lh-body);
+  color: var(--grey-900);
+  background: var(--grey-100);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p { margin: 0; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: var(--bw-2) solid var(--primary-500); outline-offset: 2px; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+svg.icon { width: var(--s-4); height: var(--s-4); flex: none; }
+
+/* ===================== Page layout ===================== */
+.page {
+  max-width: calc(var(--size-256) + var(--s-8) + var(--size-512));
+  margin: 0 auto;
+  padding: var(--s-8) var(--s-5) var(--s-9);
+}
+.page-header { margin-bottom: var(--s-7); }
+.page-header h1 {
+  font-size: var(--fs-30);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  letter-spacing: -0.015em;
+}
+.page-header p { margin-top: var(--s-2); color: var(--grey-600); }
+
+.section {
+  display: grid;
+  grid-template-columns: var(--size-256) minmax(0, var(--size-512));
+  gap: var(--s-8);
+  align-items: start;
+}
+.section + .section { margin-top: var(--s-8); }
+
+.section-intro h2 {
+  font-size: var(--fs-18);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+}
+.section-intro p {
+  margin-top: var(--s-2);
+  font-size: var(--fs-14);
+  line-height: var(--lh-small);
+  color: var(--grey-600);
+}
+
+/* ===================== Card ===================== */
+.card {
+  background: var(--white);
+  border-radius: var(--r-8);
+  box-shadow: var(--shadow-2);
+  overflow: hidden;
+}
+.card-body { padding: var(--s-6); }
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--s-4);
+  padding: var(--s-4) var(--s-6);
+  background: var(--grey-50);
+}
+.card--danger { border-top: var(--bw-4) solid var(--red-500); }
+
+/* ===================== Form fields ===================== */
+.field + .field { margin-top: var(--s-5); }
+.field > label, .field > .label {
+  display: block;
+  margin-bottom: var(--s-2);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-small);
+  color: var(--grey-800);
+}
+.input {
+  display: block;
+  width: 100%;
+  padding: var(--s-2) var(--s-3);
+  font-size: var(--fs-16);
+  line-height: var(--lh-body);
+  background: var(--white);
+  border: var(--bw-1) solid var(--grey-300);
+  border-radius: var(--r-8);
+  box-shadow: var(--shadow-inset);
+}
+.input:hover { border-color: var(--grey-400); }
+.input:focus-visible { outline-offset: 0; border-color: var(--primary-500); }
+.input[aria-invalid="true"] { border-color: var(--red-500); }
+.hint, .error {
+  display: flex;
+  gap: var(--s-1);
+  align-items: flex-start;
+  margin-top: var(--s-2);
+  font-size: var(--fs-14);
+  line-height: var(--lh-small);
+}
+.hint { color: var(--grey-600); }
+.error { color: var(--red-700); }
+.error svg.icon { margin-top: var(--s-1); }
+.error[hidden] { display: none; }
+
+/* Avatar */
+.avatar-row { display: flex; align-items: center; gap: var(--s-5); }
+.avatar {
+  position: relative;
+  width: var(--s-8);
+  height: var(--s-8);
+  flex: none;
+  border-radius: var(--r-full);
+  background: var(--primary-100);
+  color: var(--primary-700);
+  font-size: var(--fs-20);
+  font-weight: var(--fw-bold);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.avatar::after {               /* inner edge keeps photo from bleeding into the page */
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px oklch(21% 0.016 260 / .1);
+}
+.avatar-actions { display: flex; align-items: center; gap: var(--s-4); flex-wrap: wrap; }
+.avatar-actions .hint { flex-basis: 100%; margin-top: 0; }
+
+/* ===================== Buttons ===================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-4);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-small);
+  border: var(--bw-1) solid transparent;
+  border-radius: var(--r-8);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn:disabled { opacity: var(--o-disabled); cursor: not-allowed; }
+.btn:not(:disabled):active { box-shadow: none; }
+
+.btn--primary {
+  background: var(--primary-500);
+  color: var(--white);
+  box-shadow: inset 0 1px 0 var(--primary-400), var(--shadow-1);
+}
+.btn--primary:not(:disabled):hover { background: var(--primary-600); }
+
+.btn--secondary {
+  background: var(--white);
+  color: var(--grey-800);
+  border-color: var(--grey-300);
+  box-shadow: var(--shadow-1);
+}
+.btn--secondary:not(:disabled):hover { background: var(--grey-50); border-color: var(--grey-400); }
+
+.btn--danger-outline {
+  background: var(--white);
+  color: var(--red-700);
+  border-color: var(--red-300);
+  box-shadow: var(--shadow-1);
+}
+.btn--danger-outline:not(:disabled):hover { background: var(--red-100); }
+
+.btn--danger {
+  background: var(--red-600);
+  color: var(--white);
+  box-shadow: inset 0 1px 0 var(--red-500), var(--shadow-1);
+}
+.btn--danger:not(:disabled):hover { background: var(--red-700); }
+
+.btn--link {
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--grey-600);
+  font-weight: var(--fw-bold);
+}
+.btn--link:hover { color: var(--red-700); text-decoration: underline; text-underline-offset: 2px; }
+
+/* Status message (save feedback) */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  margin-right: auto;
+  font-size: var(--fs-14);
+  line-height: var(--lh-small);
+  color: var(--green-700);
+}
+.status:empty { display: none; }
+.status--muted { color: var(--grey-600); }
+
+/* ===================== Toggles ===================== */
+.toggle-list { list-style: none; margin: 0; padding: 0; }
+.toggle-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-5);
+}
+.toggle-item + .toggle-item { margin-top: var(--s-5); }
+.toggle-text label {
+  display: block;
+  font-size: var(--fs-14);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-small);
+  color: var(--grey-900);
+  cursor: pointer;
+}
+.toggle-text p {
+  font-size: var(--fs-14);
+  line-height: var(--lh-small);
+  color: var(--grey-600);
+}
+.switch {
+  appearance: none;
+  position: relative;
+  flex: none;
+  width: var(--s-7);
+  height: var(--s-5);
+  margin: 0;
+  border-radius: var(--r-full);
+  background: var(--grey-300);
+  box-shadow: var(--shadow-inset);
+  cursor: pointer;
+  transition: background-color .15s;
+}
+.switch::before {
+  content: "";
+  position: absolute;
+  top: 2px; left: 2px;
+  /* knob = track height minus 2×2px micro-step inset */
+  width: calc(var(--s-5) - 4px);
+  height: calc(var(--s-5) - 4px);
+  border-radius: var(--r-full);
+  background: var(--white);
+  box-shadow: var(--shadow-1);
+  transition: transform .15s;
+}
+.switch:checked { background: var(--primary-500); }
+.switch:checked::before { transform: translateX(var(--s-5)); }
+.switch:focus-visible { outline-offset: 2px; }
+
+/* ===================== Danger zone ===================== */
+.danger-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+}
+.danger-row h3 {
+  font-size: var(--fs-16);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+}
+.danger-row p {
+  margin-top: var(--s-1);
+  font-size: var(--fs-14);
+  line-height: var(--lh-small);
+  color: var(--grey-600);
+}
+
+/* ===================== Dialog ===================== */
+dialog {
+  width: calc(100% - var(--s-6));
+  max-width: var(--size-512);
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-8);
+  box-shadow: var(--shadow-5);
+  color: var(--grey-900);
+}
+dialog::backdrop { background: var(--grey-900); opacity: var(--o-scrim); }
+.dialog-body { padding: var(--s-6); }
+.dialog-head { display: flex; gap: var(--s-4); align-items: flex-start; }
+.dialog-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--s-7);
+  height: var(--s-7);
+  border-radius: var(--r-full);
+  background: var(--red-100);
+  color: var(--red-600);
+}
+.dialog-icon svg.icon { width: var(--s-5); height: var(--s-5); }
+.dialog-head h2 {
+  font-size: var(--fs-18);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+}
+.dialog-head p {
+  margin-top: var(--s-2);
+  font-size: var(--fs-14);
+  line-height: var(--lh-small);
+  color: var(--grey-600);
+}
+.dialog-body .field { margin-top: var(--s-5); }
+.dialog-body code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: var(--fs-14);
+  color: var(--grey-900);
+  background: var(--grey-100);
+  padding: 2px var(--s-1);
+  border-radius: var(--r-4);
+}
+
+/* Deleted end state */
+.farewell {
+  max-width: var(--size-384);
+  margin: var(--s-9) auto 0;
+  text-align: center;
+}
+.farewell h1 { font-size: var(--fs-24); font-weight: var(--fw-bold); line-height: var(--lh-heading); }
+.farewell p { margin-top: var(--s-2); color: var(--grey-600); }
+
+/* ===================== Responsive ===================== */
+@media (max-width: 860px) {
+  .section { grid-template-columns: minmax(0, 1fr); gap: var(--s-4); }
+  .section + .section { margin-top: var(--s-7); }
+}
+@media (max-width: 560px) {
+  .page { padding: var(--s-6) var(--s-4) var(--s-8); }
+  .page-header { margin-bottom: var(--s-6); }
+  .page-header h1 { font-size: var(--fs-24); }
+  .section-intro h2 { font-size: var(--fs-16); }
+  .card-body { padding: var(--s-5); }
+  .card-footer { padding: var(--s-4) var(--s-5); }
+  .danger-row { flex-direction: column; align-items: flex-start; }
+  .dialog-body { padding: var(--s-5); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .switch, .switch::before { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 20 20"><path fill="currentColor" fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 20 20"><path fill="currentColor" fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a1 1 0 0 0-1 1v4a1 1 0 1 0 2 0V6a1 1 0 0 0-1-1Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd"/></symbol>
+  <symbol id="i-warning" viewBox="0 0 20 20"><path fill="currentColor" fill-rule="evenodd" d="M8.3 2.9a2 2 0 0 1 3.4 0l6.2 10.8A2 2 0 0 1 16.2 17H3.8a2 2 0 0 1-1.7-3L8.3 2.9ZM10 6a1 1 0 0 0-1 1v3a1 1 0 1 0 2 0V7a1 1 0 0 0-1-1Zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd"/></symbol>
+</svg>
+
+<main class="page" id="main">
+  <header class="page-header">
+    <h1>Account settings</h1>
+    <p>Manage your profile, password, and how we contact you.</p>
+  </header>
+
+  <!-- ============ Profile ============ -->
+  <section class="section" aria-labelledby="profile-title">
+    <div class="section-intro">
+      <h2 id="profile-title">Profile</h2>
+      <p>Your name and photo are visible to people you work with.</p>
+    </div>
+
+    <form class="card" id="profile-form" novalidate>
+      <div class="card-body">
+        <div class="field">
+          <span class="label" id="photo-label">Photo</span>
+          <div class="avatar-row">
+            <div class="avatar" id="avatar" aria-labelledby="photo-label" role="img">
+              <span id="avatar-initials">MR</span>
+            </div>
+            <div class="avatar-actions">
+              <label for="avatar-input" class="btn btn--secondary">Change photo</label>
+              <input type="file" id="avatar-input" accept="image/png, image/jpeg, image/webp" class="visually-hidden">
+              <button type="button" class="btn btn--link" id="avatar-remove" hidden>Remove</button>
+              <p class="hint">JPG, PNG or WebP, up to 2 MB.</p>
+            </div>
+          </div>
+          <p class="error" id="avatar-error" hidden><svg class="icon"><use href="#i-alert"/></svg><span></span></p>
+        </div>
+
+        <div class="field">
+          <label for="name">Full name</label>
+          <input class="input" id="name" name="name" type="text" autocomplete="name" value="Maya Rodriguez" required aria-describedby="name-error">
+          <p class="error" id="name-error" hidden><svg class="icon"><use href="#i-alert"/></svg><span></span></p>
+        </div>
+
+        <div class="field">
+          <label for="email">Email address</label>
+          <input class="input" id="email" name="email" type="email" autocomplete="email" value="maya.rodriguez@example.com" required aria-describedby="email-error">
+          <p class="error" id="email-error" hidden><svg class="icon"><use href="#i-alert"/></svg><span></span></p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <p class="status" role="status" id="profile-status"></p>
+        <button type="submit" class="btn btn--primary" id="profile-save" disabled>Save changes</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ============ Password ============ -->
+  <section class="section" aria-labelledby="password-title">
+    <div class="section-intro">
+      <h2 id="password-title">Password</h2>
+      <p>Use a password you don't use anywhere else.</p>
+    </div>
+
+    <form class="card" id="password-form" novalidate>
+      <!-- hidden username helps password managers associate the change -->
+      <input type="text" autocomplete="username" value="maya.rodriguez@example.com" hidden>
+      <div class="card-body">
+        <div class="field">
+          <label for="pw-current">Current password</label>
+          <input class="input" id="pw-current" type="password" autocomplete="current-password" aria-describedby="pw-current-error">
+          <p class="error" id="pw-current-error" hidden><svg class="icon"><use href="#i-alert"/></svg><span></span></p>
+        </div>
+        <div class="field">
+          <label for="pw-new">New password</label>
+          <input class="input" id="pw-new" type="password" autocomplete="new-password" aria-describedby="pw-new-hint pw-new-error">
+          <p class="hint" id="pw-new-hint">At least 8 characters.</p>
+          <p class="error" id="pw-new-error" hidden><svg class="icon"><use href="#i-alert"/></svg><span></span></p>
+        </div>
+        <div class="field">
+          <label for="pw-confirm">Confirm new password</label>
+          <input class="input" id="pw-confirm" type="password" autocomplete="new-password" aria-describedby="pw-confirm-error">
+          <p class="error" id="pw-confirm-error" hidden><svg class="icon"><use href="#i-alert"/></svg><span></span></p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <p class="status" role="status" id="password-status"></p>
+        <button type="submit" class="btn btn--primary" id="password-save" disabled>Update password</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ============ Notifications ============ -->
+  <section class="section" aria-labelledby="notif-title">
+    <div class="section-intro">
+      <h2 id="notif-title">Email notifications</h2>
+      <p>Choose which emails you get from us.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <ul class="toggle-list">
+          <li class="toggle-item">
+            <div class="toggle-text">
+              <label for="n-mentions">Comments and mentions</label>
+              <p id="n-mentions-d">When someone replies to you or mentions your name.</p>
+            </div>
+            <input type="checkbox" role="switch" class="switch" id="n-mentions" aria-describedby="n-mentions-d" checked>
+          </li>
+          <li class="toggle-item">
+            <div class="toggle-text">
+              <label for="n-security">Security alerts</label>
+              <p id="n-security-d">New sign-ins and changes to your password or email.</p>
+            </div>
+            <input type="checkbox" role="switch" class="switch" id="n-security" aria-describedby="n-security-d" checked>
+          </li>
+          <li class="toggle-item">
+            <div class="toggle-text">
+              <label for="n-billing">Billing receipts</label>
+              <p id="n-billing-d">A receipt each time you're charged.</p>
+            </div>
+            <input type="checkbox" role="switch" class="switch" id="n-billing" aria-describedby="n-billing-d" checked>
+          </li>
+          <li class="toggle-item">
+            <div class="toggle-text">
+              <label for="n-digest">Weekly summary</label>
+              <p id="n-digest-d">A Monday recap of activity in your workspace.</p>
+            </div>
+            <input type="checkbox" role="switch" class="switch" id="n-digest" aria-describedby="n-digest-d">
+          </li>
+          <li class="toggle-item">
+            <div class="toggle-text">
+              <label for="n-product">Product updates</label>
+              <p id="n-product-d">New features and improvements, about once a month.</p>
+            </div>
+            <input type="checkbox" role="switch" class="switch" id="n-product" aria-describedby="n-product-d">
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <p class="status status--muted" role="status" id="notif-status" data-default="Changes save automatically.">Changes save automatically.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Danger zone ============ -->
+  <section class="section" aria-labelledby="danger-title">
+    <div class="section-intro">
+      <h2 id="danger-title">Danger zone</h2>
+      <p>Actions here can't be undone.</p>
+    </div>
+
+    <div class="card card--danger">
+      <div class="card-body danger-row">
+        <div>
+          <h3>Delete account</h3>
+          <p>Permanently remove your account, profile, and all associated data.</p>
+        </div>
+        <button type="button" class="btn btn--danger-outline" id="delete-open">Delete account…</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ Delete confirmation ============ -->
+<dialog id="delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-desc">
+  <form method="dialog" id="delete-form">
+    <div class="dialog-body">
+      <div class="dialog-head">
+        <div class="dialog-icon" aria-hidden="true"><svg class="icon"><use href="#i-warning"/></svg></div>
+        <div>
+          <h2 id="delete-title">Delete your account?</h2>
+          <p id="delete-desc">Your profile, settings, and data will be permanently deleted. You won't be able to recover them.</p>
+        </div>
+      </div>
+      <div class="field">
+        <label for="delete-confirm">Type <code>DELETE</code> to confirm</label>
+        <input class="input" id="delete-confirm" type="text" autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn--secondary" id="delete-cancel">Cancel</button>
+      <button type="submit" class="btn btn--danger" id="delete-submit" disabled>Delete account</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const CHECK = '<svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>';
+
+  function setError(input, el, msg) {
+    if (msg) {
+      el.querySelector('span').textContent = msg;
+      el.hidden = false;
+      if (input) input.setAttribute('aria-invalid', 'true');
+    } else {
+      el.hidden = true;
+      if (input) input.removeAttribute('aria-invalid');
+    }
+  }
+  function flash(statusEl, text, ms = 3000) {
+    statusEl.innerHTML = CHECK + '<span></span>';
+    statusEl.querySelector('span').textContent = text;
+    clearTimeout(statusEl._t);
+    statusEl.classList.remove('status--muted');
+    statusEl._t = setTimeout(() => {
+      statusEl.textContent = statusEl.dataset.default || '';
+      if (statusEl.dataset.default) statusEl.classList.add('status--muted');
+    }, ms);
+  }
+
+  /* ---------- Profile ---------- */
+  const profileForm = $('profile-form');
+  const nameI = $('name'), emailI = $('email');
+  const avatar = $('avatar'), initialsEl = $('avatar-initials');
+  const avatarInput = $('avatar-input'), avatarRemove = $('avatar-remove');
+  const profileSave = $('profile-save');
+  let saved = { name: nameI.value, email: emailI.value, photo: null };
+  let photo = null;
+
+  const initials = (n) => n.trim().split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join('') || '?';
+
+  function renderAvatar() {
+    avatar.querySelector('img')?.remove();
+    if (photo) {
+      const img = document.createElement('img');
+      img.src = photo; img.alt = '';
+      avatar.prepend(img);
+      initialsEl.hidden = true;
+      avatarRemove.hidden = false;
+    } else {
+      initialsEl.hidden = false;
+      initialsEl.textContent = initials(nameI.value);
+      avatarRemove.hidden = true;
+    }
+  }
+  function profileDirty() {
+    profileSave.disabled = nameI.value === saved.name && emailI.value === saved.email && photo === saved.photo;
+  }
+
+  nameI.addEventListener('input', () => { if (!photo) renderAvatar(); profileDirty(); setError(nameI, $('name-error')); });
+  emailI.addEventListener('input', () => { profileDirty(); setError(emailI, $('email-error')); });
+
+  avatarInput.addEventListener('change', () => {
+    const file = avatarInput.files[0];
+    const err = $('avatar-error');
+    avatarInput.value = '';
+    if (!file) return;
+    if (!/^image\/(png|jpeg|webp)$/.test(file.type)) return setError(null, err, 'Choose a JPG, PNG or WebP image.');
+    if (file.size > 2 * 1024 * 1024) return setError(null, err, 'That image is larger than 2 MB.');
+    setError(null, err);
+    const reader = new FileReader();
+    reader.onload = () => { photo = reader.result; renderAvatar(); profileDirty(); };
+    reader.readAsDataURL(file);
+  });
+  avatarRemove.addEventListener('click', () => { photo = null; renderAvatar(); profileDirty(); });
+
+  profileForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let ok = true;
+    if (!nameI.value.trim()) { setError(nameI, $('name-error'), 'Enter your name.'); ok = false; }
+    if (!emailI.value.trim() || !emailI.checkValidity()) {
+      setError(emailI, $('email-error'), 'Enter a valid email address, like name@example.com.'); ok = false;
+    }
+    if (!ok) { profileForm.querySelector('[aria-invalid="true"]').focus(); return; }
+    nameI.value = nameI.value.trim();
+    saved = { name: nameI.value, email: emailI.value, photo };
+    profileDirty();
+    flash($('profile-status'), 'Profile saved');
+  });
+
+  /* ---------- Password ---------- */
+  const pwForm = $('password-form');
+  const cur = $('pw-current'), nw = $('pw-new'), conf = $('pw-confirm');
+  const pwSave = $('password-save');
+  [cur, nw, conf].forEach(i => i.addEventListener('input', () => {
+    pwSave.disabled = !(cur.value || nw.value || conf.value);
+    setError(i, $(i.id + '-error'));
+  }));
+  pwForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const errs = [
+      [cur, !cur.value && 'Enter your current password.'],
+      [nw, !nw.value ? 'Enter a new password.' : nw.value.length < 8 ? 'Use at least 8 characters.' : nw.value === cur.value && 'Choose a password different from your current one.'],
+      [conf, conf.value !== nw.value && "Passwords don't match."],
+    ];
+    errs.forEach(([i, m]) => setError(i, $(i.id + '-error'), m || ''));
+    const first = errs.find(([, m]) => m);
+    if (first) { first[0].focus(); return; }
+    pwForm.reset();
+    pwSave.disabled = true;
+    flash($('password-status'), 'Password updated');
+  });
+
+  /* ---------- Notifications (autosave) ---------- */
+  document.querySelectorAll('.switch').forEach(sw => sw.addEventListener('change', () => {
+    const label = document.querySelector(`label[for="${sw.id}"]`).textContent;
+    flash($('notif-status'), `${label} ${sw.checked ? 'on' : 'off'} — saved`, 2500);
+  }));
+
+  /* ---------- Delete account ---------- */
+  const dlg = $('delete-dialog'), confirmI = $('delete-confirm'), delBtn = $('delete-submit');
+  $('delete-open').addEventListener('click', () => {
+    confirmI.value = ''; delBtn.disabled = true;
+    dlg.showModal(); confirmI.focus();
+  });
+  $('delete-cancel').addEventListener('click', () => dlg.close());
+  confirmI.addEventListener('input', () => { delBtn.disabled = confirmI.value.trim() !== 'DELETE'; });
+  $('delete-form').addEventListener('submit', (e) => {
+    if (confirmI.value.trim() !== 'DELETE') { e.preventDefault(); return; }
+    const main = $('main');
+    main.innerHTML = '<div class="farewell"><h1 tabindex="-1">Your account has been deleted</h1><p>Thanks for being with us. You can close this page.</p></div>';
+    main.querySelector('h1').focus();
+  });
+})();
+</script>
+</body>
+</html>
