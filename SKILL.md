@@ -11,7 +11,7 @@ Two modes. Pick one from the request; if both apply, generate first, then critiq
 
 1. State the personality in one line (audience → typeface direction, radius, accent, copy tone), and put it as a comment at the top of the output (e.g. a CSS comment) so it travels with the file.
 2. Define the system before any markup, as tokens:
-   - Spacing and sizing (default scale in `references/layout-spacing.md`), font size (default scale in `references/typography.md`), font weight, line height, color palette in OKLCH (8–10 greys, primary and accent hues with 100–900 shades; see `references/color.md`), shadow, radius, border width.
+   - Spacing and sizing (default scale in `references/layout-spacing.md`), font size (default scale in `references/typography.md`), font weight, line height, color palette in OKLCH (8–10 greys, primary and accent hues with 100–900 shades; see `references/color.md`), shadow (5-level elevation scale; see `references/depth.md`), radius, border width.
    - Only use values from these scales.
 3. Build the core feature first, hierarchy before color, then the minimal shell. Apply the reference files for each concern (routing table below).
 4. Run `references/review-checklist.md` on the result and fix every failed item before returning.
@@ -37,6 +37,7 @@ Read only the files the task needs. Each file lists its contents at the top.
 | Layout & spacing: white space, spacing/sizing scale, widths, grids, responsive sizing, grouping | `references/layout-spacing.md` |
 | Typography: type scale, fonts, line length, line height, baseline alignment, links, alignment, letter-spacing | `references/typography.md` |
 | Color: OKLCH, palette size, shade scales, saturation, hue rotation, tinted greys, contrast, color-blindness | `references/color.md` |
+| Depth: light source, elevation/shadow scale, two-part shadows, interaction, flat depth, overlap | `references/depth.md` |
 <!-- rows added per chapter -->
 
 ## Core principles

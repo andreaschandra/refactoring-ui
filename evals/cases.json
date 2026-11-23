@@ -24,7 +24,9 @@
       "[ch5] Palette defined up front in OKLCH with grey + primary + semantic shade scales; no pure black",
       "[ch5] Non-focal colored elements (alerts, badges) use dark text on light tint",
       "[ch5] No meaning conveyed by color alone (icons/text alongside)",
-      "[fix] Personality line present as a comment at the top of the file"
+      "[fix] Personality line present as a comment at the top of the file",
+      "[ch6] Shadows from a ≤5-level elevation scale assigned by z-position; fewer distinct shadow declarations than v0.5.1",
+      "[ch6] Buttons/inputs use raised/inset light cues or flat depth consistently; pressed state lowers elevation"
     ]
   },
   {
@@ -52,7 +54,9 @@
       "[ch5] Palette defined up front in OKLCH with grey + primary + semantic shade scales; no pure black",
       "[ch5] Non-focal colored elements (alerts, badges) use dark text on light tint",
       "[ch5] No meaning conveyed by color alone (icons/text alongside)",
-      "[fix] Personality line present as a comment at the top of the file"
+      "[fix] Personality line present as a comment at the top of the file",
+      "[ch6] Shadows from a ≤5-level elevation scale assigned by z-position; fewer distinct shadow declarations than v0.5.1",
+      "[ch6] Buttons/inputs use raised/inset light cues or flat depth consistently; pressed state lowers elevation"
     ]
   },
   {
@@ -81,7 +85,9 @@
       "[ch5] Flags color-only signals (e.g. +/− in green/red only) with an icon/text fix",
       "[ch5] Flags scattered one-off colors and proposes a shade-scale palette",
       "[ch5] Flags contrast failures with ratios and fixes that keep color (flip contrast / rotate hue)",
-      "[fix] Ends with a short 'Beyond visual design' section for blocking a11y/functional issues"
+      "[fix] Ends with a short 'Beyond visual design' section for blocking a11y/functional issues",
+      "[ch6] Flags heavy/hard shadows and proposes an elevation scale with uses per level",
+      "[ch6] Flags depth that doesn't match importance (e.g. everything boxed or floating)"
     ]
   },
   {
@@ -119,7 +125,10 @@
       "[ch5] Flags contrast failures with ratios and fixes that keep color (flip contrast / rotate hue)",
       "[ch5] signup-fixed.html meets the ch5 generate items",
       "[fix] Ends with a short 'Beyond visual design' section for blocking a11y/functional issues",
-      "[fix] signup-fixed.html has the personality comment"
+      "[fix] signup-fixed.html has the personality comment",
+      "[ch6] Flags heavy/hard shadows and proposes an elevation scale with uses per level",
+      "[ch6] Flags depth that doesn't match importance (e.g. everything boxed or floating)",
+      "[ch6] signup-fixed.html meets the ch6 generate items"
     ]
   },
   {
@@ -149,7 +158,9 @@
       "[ch5] Flags color-only signals (e.g. +/− in green/red only) with an icon/text fix",
       "[ch5] Flags scattered one-off colors and proposes a shade-scale palette",
       "[ch5] Flags contrast failures with ratios and fixes that keep color (flip contrast / rotate hue)",
-      "[fix] Ends with a short 'Beyond visual design' section for blocking a11y/functional issues"
+      "[fix] Ends with a short 'Beyond visual design' section for blocking a11y/functional issues",
+      "[ch6] Flags heavy/hard shadows and proposes an elevation scale with uses per level",
+      "[ch6] Flags depth that doesn't match importance (e.g. everything boxed or floating)"
     ]
   }
 ]

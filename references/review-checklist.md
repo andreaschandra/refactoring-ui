@@ -6,6 +6,7 @@
 - Layout & spacing (ch.3)
 - Typography (ch.4)
 - Color (ch.5)
+- Depth (ch.6)
 
 Each item is a yes/no check. A "no" names the reference file to consult for the fix.
 
@@ -14,7 +15,7 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 - [ ] In grayscale, the most important element is still the most prominent and groupings are still clear.
 - [ ] Every visible control is backed by real, in-scope behavior (no implied features, no dead actions).
 - [ ] One personality throughout: one typeface direction, one radius style, one copy tone.
-- [ ] Font weights, shadows, radii, border widths, and opacities each use a small fixed set.
+- [ ] Font weights, radii, border widths, and opacities each use a small fixed set.
 
 ## Hierarchy → `hierarchy.md`
 - [ ] Each view has a clear #1 element; secondary and tertiary content is visibly pushed back.
@@ -58,3 +59,13 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 - [ ] Grey temperature (cool/warm/neutral) is deliberate and consistent with the personality.
 - [ ] Text meets 4.5:1 (normal) / 3:1 (large); non-focal colored elements use flipped contrast (dark text on light tint) instead of white on dark color.
 - [ ] Color is never the only signal: changes have icons/arrows, chart series differ in lightness as well as hue, states have text.
+
+## Depth → `depth.md`
+- [ ] Shadows come from a ~5-level elevation scale; none outside it.
+- [ ] Elevation matches z-position and importance (buttons small, cards low, dropdowns medium, modals large); not every element floats.
+- [ ] Raised elements: lighter top edge (hand-picked shade, not white overlay) + small sharp shadow below. Inset elements (inputs, wells): lighter bottom lip + small dark inset shadow at top.
+- [ ] Multi-part shadows: the tight dark shadow is strongest at low elevation and fades at high elevation.
+- [ ] Interactive states use elevation: dragging raises, pressing lowers.
+- [ ] Flat designs still show depth via lighter = closer / darker = inset, or solid zero-blur shadows.
+- [ ] Layering via overlap is used where it helps; overlapping images have a background-colored gap.
+- [ ] Effects are restrained; no photorealistic or stacked decorative shadows.
