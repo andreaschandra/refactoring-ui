@@ -32,6 +32,7 @@ Read only the files the task needs. Each file lists its contents at the top.
 |---|---|
 | Review checklist (all modes) | `references/review-checklist.md` |
 | Starting a design: feature-first, scope, personality, value systems | `references/process.md` |
+| Hierarchy: emphasis via weight/color, text on color, labels, heading sizes, button hierarchy | `references/hierarchy.md` |
 <!-- rows added per chapter -->
 
 ## Core principles
@@ -40,4 +41,5 @@ Read only the files the task needs. Each file lists its contents at the top.
 - **Feature first.** Design what the user came to do before the shell around it.
 - **Hierarchy before color.** The UI must read correctly in grayscale; color only enhances.
 - **No implied features.** Never show a control or promise that the page can't fulfil.
+- **Emphasize by de-emphasizing.** Decide the #1 element per view and quiet everything competing with it; one primary action per view.
 <!-- added per chapter; keep to the few rules that apply to every task -->
