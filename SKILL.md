@@ -39,6 +39,7 @@ Read only the files the task needs. Each file lists its contents at the top.
 | Color: OKLCH, palette size, shade scales, saturation, hue rotation, tinted greys, contrast, color-blindness | `references/color.md` |
 | Depth: light source, elevation/shadow scale, two-part shadows, interaction, flat depth, overlap | `references/depth.md` |
 | Images: photo quality, text on images, icon/screenshot/logo sizing, user-uploaded images | `references/images.md` |
+| Finishing touches: supercharged defaults, accent borders, backgrounds, empty states, fewer borders, rethinking components | `references/finishing.md` |
 <!-- rows added per chapter -->
 
 ## Core principles
@@ -48,6 +49,7 @@ Read only the files the task needs. Each file lists its contents at the top.
 - **Hierarchy before color.** The UI must read correctly in grayscale; color only enhances.
 - **No implied features.** Never show a control or promise that the page can't fulfil.
 - **More space around groups than within them.** Start generous, then remove.
+- **Fewer borders.** Separate with space, background color, or a scale shadow before reaching for a border.
 - **Color supports, never carries.** Meaning must survive without color; contrast meets WCAG.
 - **Emphasize by de-emphasizing.** Decide the #1 element per view and quiet everything competing with it; one primary action per view.
 <!-- added per chapter; keep to the few rules that apply to every task -->

@@ -8,6 +8,7 @@
 - Color (ch.5)
 - Depth (ch.6)
 - Images (ch.7)
+- Finishing touches (ch.8)
 
 Each item is a yes/no check. A "no" names the reference file to consult for the fix.
 
@@ -78,3 +79,10 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 - [ ] Screenshots aren't shrunk into illegibility (smaller viewport, partial crop, or simplified illustration).
 - [ ] Logos/icons aren't shrunk from large artwork; small sizes use simplified versions.
 - [ ] User-uploaded images sit in fixed containers with `object-fit: cover` and a subtle inner shadow/border against background bleed.
+
+## Finishing touches → `finishing.md`
+- [ ] Default elements are upgraded where cheap: icon bullets, styled quotes, polished links, brand-colored checkboxes/radios.
+- [ ] Bland areas get color through accent borders or background treatment (color change, ≤30° hue gradient, low-contrast pattern or shape), not extra elements.
+- [ ] Empty states are designed: illustration/image, clear call to action, and inactive supporting UI (filters, tabs) hidden.
+- [ ] Borders are rare: separation comes first from spacing, background color differences, or a scale shadow; no border on top of a background change.
+- [ ] Standard components are reconsidered where it helps (rich dropdowns, combined table cells, selectable cards for key choices).
