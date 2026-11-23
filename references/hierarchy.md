@@ -24,6 +24,7 @@
 - Font weights: 2 is usually enough for UI.
   - Normal (400 or 500, depending on the font) for most text.
   - Bold (600 or 700) for emphasis.
+- **Contrast floor:** de-emphasized text still meets WCAG AA: at least 4.5:1 against its background (3:1 for text ≥24px, or ≥18.7px bold). Reduce emphasis within that range; if a tint can't stay above the floor, use size or weight instead.
 - No weights below 400 for UI text. Thin weights are only for large display headings. To de-emphasize, use a lighter color or a smaller size, never a thinner weight.
 
 ## Text on colored backgrounds
