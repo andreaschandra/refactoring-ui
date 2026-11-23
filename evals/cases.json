@@ -21,7 +21,7 @@
       "[ch4] Paragraphs have a max-width in the 45–75ch range; line-height decreases for headings",
       "[ch4] Numeric columns right-aligned with tabular-nums; mixed-size rows baseline-aligned",
       "[ch4] All-caps labels have added letter-spacing; large headings tightened if the family is wide",
-      "[ch5] Palette defined up front in HSL with grey + primary + semantic shade scales; no pure black",
+      "[ch5] Palette defined up front in OKLCH with grey + primary + semantic shade scales; no pure black",
       "[ch5] Non-focal colored elements (alerts, badges) use dark text on light tint",
       "[ch5] No meaning conveyed by color alone (icons/text alongside)"
     ]
@@ -48,7 +48,7 @@
       "[ch4] Paragraphs have a max-width in the 45–75ch range; line-height decreases for headings",
       "[ch4] Numeric columns right-aligned with tabular-nums; mixed-size rows baseline-aligned",
       "[ch4] All-caps labels have added letter-spacing; large headings tightened if the family is wide",
-      "[ch5] Palette defined up front in HSL with grey + primary + semantic shade scales; no pure black",
+      "[ch5] Palette defined up front in OKLCH with grey + primary + semantic shade scales; no pure black",
       "[ch5] Non-focal colored elements (alerts, badges) use dark text on light tint",
       "[ch5] No meaning conveyed by color alone (icons/text alongside)"
     ]

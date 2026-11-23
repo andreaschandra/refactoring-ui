@@ -51,10 +51,10 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 - [ ] Letter-spacing is untouched except: tightened on large headings in wide-spaced families, widened on all-caps text.
 
 ## Color → `color.md`
-- [ ] Colors are defined in HSL from a predefined palette; no one-off values and no on-the-fly lighten/darken.
+- [ ] Colors are defined in OKLCH (in-gamut chroma) from a predefined palette; no one-off values and no on-the-fly lighten/darken.
 - [ ] Palette has 8–10 greys, 5–10 shades per primary hue, and shaded accent/semantic colors (red, amber, green), with accents used sparingly.
 - [ ] No pure black; greys step evenly from very dark grey to near-white.
-- [ ] Light and dark shades keep their saturation (not washed out); yellow/light hues darken via hue rotation, not muddy brown.
+- [ ] Light and dark shades stay colorful (chroma as high as the gamut allows); same shade number ≈ same L across hues; yellow-type hues shift slightly toward orange when darkening.
 - [ ] Grey temperature (cool/warm/neutral) is deliberate and consistent with the personality.
 - [ ] Text meets 4.5:1 (normal) / 3:1 (large); non-focal colored elements use flipped contrast (dark text on light tint) instead of white on dark color.
 - [ ] Color is never the only signal: changes have icons/arrows, chart series differ in lightness as well as hue, states have text.

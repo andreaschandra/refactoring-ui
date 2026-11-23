@@ -30,7 +30,7 @@ def metrics(path: Path) -> dict:
     return {
         "font-sizes": len(px_values(font_sizes)),
         "spacing": len(px_values(decls(css, SPACING_PROPS))),
-        "colors": len({c.lower() for c in re.findall(r"#[0-9a-f]{3,8}\b|rgba?\([^)]*\)", css, re.I)}),
+        "colors": len({c.lower() for c in re.findall(r"#[0-9a-f]{3,8}\b|(?:rgba?|hsla?|oklch|oklab|lch|lab)\([^)]*\)", css, re.I)}),
         "weights": len({w.strip() for w in decls(css, "font-weight")}),
         "shadows": len(decls(css, "box-shadow")),
         "borders": len([b for b in decls(css, r"border(?:-(?:top|right|bottom|left))?") if b.strip() not in ("0", "none")]),
