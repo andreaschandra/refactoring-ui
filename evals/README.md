@@ -15,6 +15,10 @@ claude
 - `runs/baseline/` — skill **not** installed (move `~/.claude/skills/refactoring-ui` aside first).
 - `runs/v0.N/` — skill installed at version after chapter N.
 
+## Triggering
+
+Since v0.9 the skill triggers only when named or for explicit visual-design critiques. For skill runs, start each generate prompt with `/refactoring-ui` (or append "Use the Refactoring UI skill."). Critique prompts trigger on their own; prefixing them too is harmless. Baseline runs use the plain prompts.
+
 ## Record per run
 
 - Output files named per `cases.json`.

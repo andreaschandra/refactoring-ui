@@ -17,13 +17,12 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 - [ ] In grayscale, the most important element is still the most prominent and groupings are still clear.
 - [ ] Every visible control is backed by real, in-scope behavior (no implied features, no dead actions).
 - [ ] One personality throughout: one typeface direction, one radius style, one copy tone.
-- [ ] Font weights, radii, border widths, and opacities each use a small fixed set.
+- [ ] Radii, border widths, and opacities come from their small default sets (`process.md`); font weights from the 2-weight rule (`hierarchy.md`).
 
 ## Hierarchy → `hierarchy.md`
 - [ ] Each view has a clear #1 element; secondary and tertiary content is visibly pushed back.
 - [ ] Hierarchy uses weight and color, not font size alone (no oversized primaries or tiny secondaries).
 - [ ] Text uses at most 2–3 color levels (dark / grey / light grey) and 2 weights (normal, bold); no UI text below 400.
-- [ ] All de-emphasized text still meets 4.5:1 contrast (3:1 for large text).
 - [ ] No grey or white-with-opacity text on colored backgrounds; secondary text there is a tint of the background hue.
 - [ ] Competing elements are softened rather than the key element being made louder.
 - [ ] Data isn't shown as `Label: value` where format, context, or a merged phrase would do; remaining labels are quieter than their values (except spec-sheet style pages).
@@ -34,7 +33,7 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 
 ## Layout & spacing → `layout-spacing.md`
 - [ ] Spacing is generous by default; any dense area is a deliberate choice with a reason.
-- [ ] All spacing and sizing values come from a non-linear scale (adjacent steps ≥~25% apart); no off-scale values except content-driven ones (1px borders, intrinsic media sizes).
+- [ ] All spacing and sizing values come from a non-linear scale (adjacent steps ≥~25% apart); no off-scale values except 2px micro-steps inside small components and content-driven ones (1px borders, intrinsic media sizes).
 - [ ] Content uses only the width it needs (forms, cards, text blocks have max-widths); not everything is full-width because the nav is.
 - [ ] Sidebars and optimal-width elements use fixed or max-widths, not grid percentages; the main area flexes.
 - [ ] Responsive sizes are set per breakpoint; large type and elements shrink more than small ones on narrow screens.
@@ -59,7 +58,7 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 - [ ] No pure black; greys step evenly from very dark grey to near-white.
 - [ ] Light and dark shades stay colorful (chroma as high as the gamut allows); same shade number ≈ same L across hues; yellow-type hues shift slightly toward orange when darkening.
 - [ ] Grey temperature (cool/warm/neutral) is deliberate and consistent with the personality.
-- [ ] Text meets 4.5:1 (normal) / 3:1 (large); non-focal colored elements use flipped contrast (dark text on light tint) instead of white on dark color.
+- [ ] All text, including de-emphasized text, meets 4.5:1 (normal) / 3:1 (large); non-focal colored elements use flipped contrast (dark text on light tint) instead of white on dark color.
 - [ ] Color is never the only signal: changes have icons/arrows, chart series differ in lightness as well as hue, states have text.
 
 ## Depth → `depth.md`

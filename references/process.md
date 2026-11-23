@@ -48,6 +48,11 @@ Pick a personality from the audience (e.g. serious/trustworthy, neutral, playful
 - Systematize: font size, font weight, line height, color (8–10 shades per hue), margin, padding, width, height, box shadow, border radius, border width, opacity.
 - Values in a scale must be visibly different from their neighbours; near-duplicates (12px vs 13px, 10% vs 15% shadow) are a sign of no system.
 - When a new kind of decision comes up, add it to the system instead of solving it once.
+- Default sets where the book gives none (adjust to the personality, but keep the set small):
+  - **Radius:** `0, 4, 8, 12, 16, full (9999px)`. Formal → 0–4; neutral → 4–8; playful → 12–16. Pills and avatars use full.
+  - **Border width:** `1, 2, 4` px (4 mainly for accent borders).
+  - **Opacity:** `.5` disabled, `.7` muted overlays/scrims, `1`. Don't use opacity to de-emphasize text (see `hierarchy.md`).
+  - Font size, spacing, color, and shadow scales live in their own files.
 - Generate: declare these scales as tokens/variables before writing components; no literal values outside the scales.
 - Critique: count distinct values per property. Many near-identical values = no system; the fix is a scale, not individual tweaks.
 

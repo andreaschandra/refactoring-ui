@@ -22,7 +22,8 @@
   `4, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 640, 768` (px)
 
 - Use it by stepping: if a gap isn't enough, take the next value, not the next pixel.
-- Any value off the scale is a defect unless it is content-driven (e.g. 1px borders, an image's intrinsic size).
+- **2px micro-step:** allowed only inside small components (badge/pill vertical padding, toggle knob inset, focus-ring offset, 1–2px icon nudges). Never for layout spacing between elements.
+- Any other value off the scale is a defect unless it is content-driven (e.g. 1px borders, an image's intrinsic size).
 
 ## Width: don't fill the screen
 - Use the width the content needs. If a form works at 600px, make it 600px wide on a 1400px screen; extra margin around the edges is harmless, stretched content is hard to read.
