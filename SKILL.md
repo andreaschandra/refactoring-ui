@@ -9,11 +9,12 @@ Two modes. Pick one from the request; if both apply, generate first, then critiq
 
 ## Mode A — Generate
 
-1. Define the system before any markup:
-   - Spacing scale, type scale, color palette (greys + primary + accents, with shades), shadow scale, radius.
+1. State the personality in one line (audience → typeface direction, radius, accent, copy tone).
+2. Define the system before any markup, as tokens:
+   - Spacing, font size, font weight, line height, color palette (greys + primary + accents, with shades), shadow, radius, border width.
    - Only use values from these scales.
-2. Build the layout, applying the reference files for each concern (routing table below).
-3. Run `references/review-checklist.md` on the result and fix every failed item before returning.
+3. Build the core feature first, hierarchy before color, then the minimal shell. Apply the reference files for each concern (routing table below).
+4. Run `references/review-checklist.md` on the result and fix every failed item before returning.
 
 ## Mode B — Critique
 
@@ -30,8 +31,13 @@ Read only the files the task needs. Each file lists its contents at the top.
 | Concern | File |
 |---|---|
 | Review checklist (all modes) | `references/review-checklist.md` |
+| Starting a design: feature-first, scope, personality, value systems | `references/process.md` |
 <!-- rows added per chapter -->
 
 ## Core principles
 
+- **Systematize everything.** Every size, space, color, weight, shadow, and radius comes from a small predefined scale. No ad hoc values.
+- **Feature first.** Design what the user came to do before the shell around it.
+- **Hierarchy before color.** The UI must read correctly in grayscale; color only enhances.
+- **No implied features.** Never show a control or promise that the page can't fulfil.
 <!-- added per chapter; keep to the few rules that apply to every task -->

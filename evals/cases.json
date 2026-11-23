@@ -5,7 +5,10 @@
     "query": "Build a pricing page for a project-management SaaS with three tiers (Free, Pro, Team), a monthly/annual toggle, and an FAQ section. Single self-contained HTML file with inline CSS, no frameworks. Save it as gen-pricing.html.",
     "output": "gen-pricing.html",
     "expected_behavior": [
-      "filled in per chapter"
+      "[ch1] States a personality and applies it consistently (one radius style, one copy tone)",
+      "[ch1] Declares tokens for spacing, font size, weight, radius and shadow, not just color",
+      "[ch1] Fewer distinct spacing and font-size values than baseline (metrics.py)",
+      "[ch1] No controls for out-of-scope features; shell is minimal and quieter than the core content"
     ]
   },
   {
@@ -14,7 +17,10 @@
     "query": "Build an account settings page for a web app: profile (name, email, avatar), password change, notification preferences (5 toggles), and a danger zone with account deletion. Single self-contained HTML file with inline CSS, no frameworks. Save it as gen-settings.html.",
     "output": "gen-settings.html",
     "expected_behavior": [
-      "filled in per chapter"
+      "[ch1] States a personality and applies it consistently (one radius style, one copy tone)",
+      "[ch1] Declares tokens for spacing, font size, weight, radius and shadow, not just color",
+      "[ch1] Fewer distinct spacing and font-size values than baseline (metrics.py)",
+      "[ch1] No controls for out-of-scope features; shell is minimal and quieter than the core content"
     ]
   },
   {
@@ -26,7 +32,10 @@
     ],
     "output": "crit-dashboard.md",
     "expected_behavior": [
-      "filled in per chapter"
+      "[ch1] Flags the lack of a value system (near-duplicate sizes/spacing) and proposes scales as the fix",
+      "[ch1] Flags controls that imply missing functionality",
+      "[ch1] Checks hierarchy independent of color (grayscale test)",
+      "[ch1] Flags mixed personality signals (fonts, radius, tone)"
     ]
   },
   {
@@ -41,7 +50,11 @@
       "signup-fixed.html"
     ],
     "expected_behavior": [
-      "filled in per chapter"
+      "[ch1] Flags the lack of a value system (near-duplicate sizes/spacing) and proposes scales as the fix",
+      "[ch1] Flags controls that imply missing functionality",
+      "[ch1] Checks hierarchy independent of color (grayscale test)",
+      "[ch1] Flags mixed personality signals (fonts, radius, tone)",
+      "[ch1] signup-fixed.html meets the generate items above"
     ]
   }
 ]
