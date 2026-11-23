@@ -1,0 +1,32 @@
+[
+  {
+    "id": "gen-pricing",
+    "mode": "generate",
+    "query": "Build a pricing page for a project-management SaaS with three tiers (Free, Pro, Team), a monthly/annual toggle, and an FAQ section. Single self-contained HTML file with inline CSS, no frameworks.",
+    "output": "gen-pricing.html",
+    "expected_behavior": ["filled in per chapter"]
+  },
+  {
+    "id": "gen-settings",
+    "mode": "generate",
+    "query": "Build an account settings page for a web app: profile (name, email, avatar), password change, notification preferences (5 toggles), and a danger zone with account deletion. Single self-contained HTML file with inline CSS, no frameworks.",
+    "output": "gen-settings.html",
+    "expected_behavior": ["filled in per chapter"]
+  },
+  {
+    "id": "crit-dashboard",
+    "mode": "critique",
+    "query": "Review the UI design of evals/fixtures/dashboard.html and tell me what to improve.",
+    "files": ["evals/fixtures/dashboard.html"],
+    "output": "crit-dashboard.md",
+    "expected_behavior": ["filled in per chapter"]
+  },
+  {
+    "id": "crit-signup",
+    "mode": "critique",
+    "query": "This signup page feels amateur. Critique evals/fixtures/signup.html, then return an improved version as signup-fixed.html.",
+    "files": ["evals/fixtures/signup.html"],
+    "output": ["crit-signup.md", "signup-fixed.html"],
+    "expected_behavior": ["filled in per chapter"]
+  }
+]

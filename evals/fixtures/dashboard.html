@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sales Dashboard</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; background: #ffffff; color: #000; }
+  .header { background: #3b5998; color: #fff; padding: 13px 17px; border-bottom: 3px solid #000; }
+  .header h1 { font-size: 26px; margin: 0; font-weight: bold; display: inline; }
+  .header span { color: #888; font-size: 13px; margin-left: 9px; }
+  .nav { border: 1px solid #ccc; padding: 7px; }
+  .nav a { color: blue; margin-right: 11px; font-size: 15px; font-weight: bold; }
+  .cards { display: flex; padding: 10px; }
+  .card { border: 1px solid #999; margin: 5px; padding: 9px; flex: 1; text-align: center; box-shadow: 4px 4px 8px #000; }
+  .card .label { font-size: 18px; font-weight: bold; color: #333; }
+  .card .value { font-size: 19px; font-weight: bold; color: #000; }
+  .card .change { font-size: 14px; font-weight: bold; color: green; }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; }
+  th, td { border: 1px solid #aaa; padding: 4px; font-size: 14px; text-align: center; }
+  th { background: #ddd; font-weight: bold; }
+  .section { border: 1px solid #ccc; margin: 12px; padding: 8px; }
+  .section h2 { font-size: 21px; font-weight: bold; margin: 3px 0 10px 0; }
+  button { background: #3b5998; color: #fff; border: 2px solid #000; padding: 6px 12px; font-weight: bold; margin: 2px; }
+  .empty { color: #bbb; font-size: 12px; }
+</style>
+</head>
+<body>
+  <div class="header"><h1>SalesTracker Pro Dashboard</h1><span>Welcome back, John Smith! Last login: 2026-11-22 09:14:33</span></div>
+  <div class="nav"><a href="#">Dashboard</a><a href="#">Orders</a><a href="#">Customers</a><a href="#">Products</a><a href="#">Reports</a><a href="#">Settings</a><a href="#">Help</a><a href="#">Logout</a></div>
+  <div class="cards">
+    <div class="card"><div class="label">Total Revenue:</div><div class="value">$48,291.00</div><div class="change">+12.4%</div></div>
+    <div class="card"><div class="label">Total Orders:</div><div class="value">1,204</div><div class="change">+3.1%</div></div>
+    <div class="card"><div class="label">New Customers:</div><div class="value">87</div><div class="change" style="color:red">-2.0%</div></div>
+    <div class="card"><div class="label">Avg. Order Value:</div><div class="value">$40.11</div><div class="change">+8.9%</div></div>
+  </div>
+  <div class="section">
+    <h2>Recent Orders</h2>
+    <button>Export CSV</button><button>Print</button><button>Refresh</button><button>Delete Selected</button><button>New Order</button>
+    <table>
+      <tr><th>Order ID</th><th>Customer Name</th><th>Date</th><th>Status</th><th>Amount</th><th>Actions</th></tr>
+      <tr><td>#10482</td><td>Maria Garcia</td><td>2026-11-22</td><td>Shipped</td><td>$129.00</td><td><button>View</button><button>Edit</button><button>Delete</button></td></tr>
+      <tr><td>#10481</td><td>Kenji Tanaka</td><td>2026-11-22</td><td>Pending</td><td>$54.50</td><td><button>View</button><button>Edit</button><button>Delete</button></td></tr>
+      <tr><td>#10480</td><td>Aisha Rahman</td><td>2026-11-21</td><td>Cancelled</td><td>$18.99</td><td><button>View</button><button>Edit</button><button>Delete</button></td></tr>
+      <tr><td>#10479</td><td>Lucas Müller</td><td>2026-11-21</td><td>Shipped</td><td>$312.40</td><td><button>View</button><button>Edit</button><button>Delete</button></td></tr>
+    </table>
+  </div>
+  <div class="section">
+    <h2>Top Products</h2>
+    <p class="empty">No data available for the selected period. Please select a different date range or contact support if you believe this is an error.</p>
+  </div>
+</body>
+</html>
