@@ -1,6 +1,6 @@
 # Evals
 
-4 fixed tasks in `cases.json`: 2 generate, 2 critique. Outputs are plain HTML/CSS so they can be rendered and diffed; the skill itself stays framework-agnostic.
+5 fixed tasks in `cases.json`: 2 generate, 3 critique. `ANSWER_KEY.md` lists planted issues per fixture; never copy it into a run folder. Outputs are plain HTML/CSS so they can be rendered and diffed; the skill itself stays framework-agnostic.
 
 ## Run
 

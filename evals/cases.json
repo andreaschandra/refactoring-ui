@@ -56,5 +56,21 @@
       "[ch1] Flags mixed personality signals (fonts, radius, tone)",
       "[ch1] signup-fixed.html meets the generate items above"
     ]
+  },
+  {
+    "id": "crit-team",
+    "mode": "critique",
+    "query": "Review the UI design of team.html and tell me what to improve. Save your review as crit-team.md.",
+    "files": [
+      "team.html"
+    ],
+    "output": "crit-team.md",
+    "expected_behavior": [
+      "[ch1] Flags the lack of a value system (near-duplicate sizes/spacing) and proposes scales as the fix",
+      "[ch1] Flags controls that imply missing functionality",
+      "[ch1] Checks hierarchy independent of color (grayscale test)",
+      "[ch1] Flags mixed personality signals (fonts, radius, tone)",
+      "Catches more of the 16 planted issues in evals/ANSWER_KEY.md than the previous run"
+    ]
   }
 ]
