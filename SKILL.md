@@ -11,7 +11,7 @@ Two modes. Pick one from the request; if both apply, generate first, then critiq
 
 1. State the personality in one line (audience → typeface direction, radius, accent, copy tone).
 2. Define the system before any markup, as tokens:
-   - Spacing and sizing (default scale in `references/layout-spacing.md`), font size (default scale in `references/typography.md`), font weight, line height, color palette (greys + primary + accents, with shades), shadow, radius, border width.
+   - Spacing and sizing (default scale in `references/layout-spacing.md`), font size (default scale in `references/typography.md`), font weight, line height, color palette in HSL (8–10 greys, primary and accent hues with 100–900 shades; see `references/color.md`), shadow, radius, border width.
    - Only use values from these scales.
 3. Build the core feature first, hierarchy before color, then the minimal shell. Apply the reference files for each concern (routing table below).
 4. Run `references/review-checklist.md` on the result and fix every failed item before returning.
@@ -35,6 +35,7 @@ Read only the files the task needs. Each file lists its contents at the top.
 | Hierarchy: emphasis via weight/color, text on color, labels, heading sizes, button hierarchy | `references/hierarchy.md` |
 | Layout & spacing: white space, spacing/sizing scale, widths, grids, responsive sizing, grouping | `references/layout-spacing.md` |
 | Typography: type scale, fonts, line length, line height, baseline alignment, links, alignment, letter-spacing | `references/typography.md` |
+| Color: HSL, palette size, shade scales, saturation, hue rotation, tinted greys, contrast, color-blindness | `references/color.md` |
 <!-- rows added per chapter -->
 
 ## Core principles
@@ -44,5 +45,6 @@ Read only the files the task needs. Each file lists its contents at the top.
 - **Hierarchy before color.** The UI must read correctly in grayscale; color only enhances.
 - **No implied features.** Never show a control or promise that the page can't fulfil.
 - **More space around groups than within them.** Start generous, then remove.
+- **Color supports, never carries.** Meaning must survive without color; contrast meets WCAG.
 - **Emphasize by de-emphasizing.** Decide the #1 element per view and quiet everything competing with it; one primary action per view.
 <!-- added per chapter; keep to the few rules that apply to every task -->

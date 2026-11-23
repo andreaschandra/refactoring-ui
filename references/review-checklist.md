@@ -5,6 +5,7 @@
 - Hierarchy (ch.2)
 - Layout & spacing (ch.3)
 - Typography (ch.4)
+- Color (ch.5)
 
 Each item is a yes/no check. A "no" names the reference file to consult for the fix.
 
@@ -13,7 +14,6 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 - [ ] In grayscale, the most important element is still the most prominent and groupings are still clear.
 - [ ] Every visible control is backed by real, in-scope behavior (no implied features, no dead actions).
 - [ ] One personality throughout: one typeface direction, one radius style, one copy tone.
-- [ ] Colors come from a defined palette; no one-off hex values.
 - [ ] Font weights, shadows, radii, border widths, and opacities each use a small fixed set.
 
 ## Hierarchy → `hierarchy.md`
@@ -49,3 +49,12 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 - [ ] Numbers in tables are right-aligned with tabular figures.
 - [ ] Justified text has hyphenation enabled (or isn't justified).
 - [ ] Letter-spacing is untouched except: tightened on large headings in wide-spaced families, widened on all-caps text.
+
+## Color → `color.md`
+- [ ] Colors are defined in HSL from a predefined palette; no one-off values and no on-the-fly lighten/darken.
+- [ ] Palette has 8–10 greys, 5–10 shades per primary hue, and shaded accent/semantic colors (red, amber, green), with accents used sparingly.
+- [ ] No pure black; greys step evenly from very dark grey to near-white.
+- [ ] Light and dark shades keep their saturation (not washed out); yellow/light hues darken via hue rotation, not muddy brown.
+- [ ] Grey temperature (cool/warm/neutral) is deliberate and consistent with the personality.
+- [ ] Text meets 4.5:1 (normal) / 3:1 (large); non-focal colored elements use flipped contrast (dark text on light tint) instead of white on dark color.
+- [ ] Color is never the only signal: changes have icons/arrows, chart series differ in lightness as well as hue, states have text.

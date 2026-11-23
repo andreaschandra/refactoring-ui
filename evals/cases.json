@@ -20,7 +20,10 @@
       "[ch4] Font sizes all on the type scale (12/14/16/18/20/24/30/36/48/60/72 or similar hand-picked); metrics.py font-size count at or below baseline",
       "[ch4] Paragraphs have a max-width in the 45–75ch range; line-height decreases for headings",
       "[ch4] Numeric columns right-aligned with tabular-nums; mixed-size rows baseline-aligned",
-      "[ch4] All-caps labels have added letter-spacing; large headings tightened if the family is wide"
+      "[ch4] All-caps labels have added letter-spacing; large headings tightened if the family is wide",
+      "[ch5] Palette defined up front in HSL with grey + primary + semantic shade scales; no pure black",
+      "[ch5] Non-focal colored elements (alerts, badges) use dark text on light tint",
+      "[ch5] No meaning conveyed by color alone (icons/text alongside)"
     ]
   },
   {
@@ -44,7 +47,10 @@
       "[ch4] Font sizes all on the type scale (12/14/16/18/20/24/30/36/48/60/72 or similar hand-picked); metrics.py font-size count at or below baseline",
       "[ch4] Paragraphs have a max-width in the 45–75ch range; line-height decreases for headings",
       "[ch4] Numeric columns right-aligned with tabular-nums; mixed-size rows baseline-aligned",
-      "[ch4] All-caps labels have added letter-spacing; large headings tightened if the family is wide"
+      "[ch4] All-caps labels have added letter-spacing; large headings tightened if the family is wide",
+      "[ch5] Palette defined up front in HSL with grey + primary + semantic shade scales; no pure black",
+      "[ch5] Non-focal colored elements (alerts, badges) use dark text on light tint",
+      "[ch5] No meaning conveyed by color alone (icons/text alongside)"
     ]
   },
   {
@@ -69,7 +75,10 @@
       "[ch3] Flags stretched widths / missing max-widths",
       "[ch4] Flags long line lengths, uniform line-height, and centered multi-line text",
       "[ch4] Flags left-aligned numbers in tables",
-      "[ch4] Flags off-scale / near-duplicate font sizes and proposes a type scale"
+      "[ch4] Flags off-scale / near-duplicate font sizes and proposes a type scale",
+      "[ch5] Flags color-only signals (e.g. +/− in green/red only) with an icon/text fix",
+      "[ch5] Flags scattered one-off colors and proposes a shade-scale palette",
+      "[ch5] Flags contrast failures with ratios and fixes that keep color (flip contrast / rotate hue)"
     ]
   },
   {
@@ -101,7 +110,11 @@
       "[ch4] Flags long line lengths, uniform line-height, and centered multi-line text",
       "[ch4] Flags left-aligned numbers in tables",
       "[ch4] Flags off-scale / near-duplicate font sizes and proposes a type scale",
-      "[ch4] signup-fixed.html meets the ch4 generate items"
+      "[ch4] signup-fixed.html meets the ch4 generate items",
+      "[ch5] Flags color-only signals (e.g. +/− in green/red only) with an icon/text fix",
+      "[ch5] Flags scattered one-off colors and proposes a shade-scale palette",
+      "[ch5] Flags contrast failures with ratios and fixes that keep color (flip contrast / rotate hue)",
+      "[ch5] signup-fixed.html meets the ch5 generate items"
     ]
   },
   {
@@ -127,7 +140,10 @@
       "[ch3] Flags stretched widths / missing max-widths",
       "[ch4] Flags long line lengths, uniform line-height, and centered multi-line text",
       "[ch4] Flags left-aligned numbers in tables",
-      "[ch4] Flags off-scale / near-duplicate font sizes and proposes a type scale"
+      "[ch4] Flags off-scale / near-duplicate font sizes and proposes a type scale",
+      "[ch5] Flags color-only signals (e.g. +/− in green/red only) with an icon/text fix",
+      "[ch5] Flags scattered one-off colors and proposes a shade-scale palette",
+      "[ch5] Flags contrast failures with ratios and fixes that keep color (flip contrast / rotate hue)"
     ]
   }
 ]

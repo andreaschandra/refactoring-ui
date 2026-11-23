@@ -24,13 +24,13 @@
 - Font weights: 2 is usually enough for UI.
   - Normal (400 or 500, depending on the font) for most text.
   - Bold (600 or 700) for emphasis.
-- **Contrast floor:** de-emphasized text still meets WCAG AA: at least 4.5:1 against its background (3:1 for text ≥24px, or ≥18.7px bold). Reduce emphasis within that range; if a tint can't stay above the floor, use size or weight instead.
+- **Contrast floor:** de-emphasized text still meets the WCAG minimums in `color.md` (4.5:1 normal, 3:1 large). Reduce emphasis within that range; if a tint can't stay above the floor, use size or weight instead.
 - No weights below 400 for UI text. Thin weights are only for large display headings. To de-emphasize, use a lighter color or a smaller size, never a thinner weight.
 
 ## Text on colored backgrounds
 - Grey text on a colored background looks wrong. What de-emphasizes on white is *reduced contrast*, not greyness.
 - Don't use white with reduced opacity either: it looks washed out or disabled, and on images/patterns the background shows through.
-- Do: pick a color with the **same hue as the background**, then adjust saturation and lightness until contrast is reduced but the text doesn't look faded. E.g. on a dark green header, secondary text is a pale green tint, not a neutral grey.
+- Do: pick a color with the **same hue as the background**, then adjust saturation and lightness until contrast is reduced but the text doesn't look faded (if lightness alone can't get enough contrast, rotate the hue; see `color.md`). E.g. on a dark green header, secondary text is a pale green tint, not a neutral grey.
 
 ## Emphasize by de-emphasizing
 - If the key element doesn't stand out and adding emphasis doesn't help, soften what competes with it.
