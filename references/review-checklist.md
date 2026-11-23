@@ -3,6 +3,7 @@
 ## Contents
 - Process & systems (ch.1)
 - Hierarchy (ch.2)
+- Layout & spacing (ch.3)
 
 Each item is a yes/no check. A "no" names the reference file to consult for the fix.
 
@@ -12,7 +13,6 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 - [ ] Every visible control is backed by real, in-scope behavior (no implied features, no dead actions).
 - [ ] One personality throughout: one typeface direction, one radius style, one copy tone.
 - [ ] Font sizes come from a defined scale (no near-duplicates like 13/14/15px used side by side).
-- [ ] Spacing (margin, padding, gap) comes from a defined scale.
 - [ ] Colors come from a defined palette; no one-off hex values.
 - [ ] Font weights, shadows, radii, border widths, and opacities each use a small fixed set.
 
@@ -28,3 +28,12 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 - [ ] Heavy elements (solid icons) are softened in color; faint elements gain width rather than darker color.
 - [ ] One primary action per view (solid); secondary = outline/low contrast; tertiary = link style.
 - [ ] Destructive actions that aren't primary use secondary/tertiary style; the strong red style appears on the confirmation step.
+
+## Layout & spacing → `layout-spacing.md`
+- [ ] Spacing is generous by default; any dense area is a deliberate choice with a reason.
+- [ ] All spacing and sizing values come from a non-linear scale (adjacent steps ≥~25% apart); no off-scale values except content-driven ones (1px borders, intrinsic media sizes).
+- [ ] Content uses only the width it needs (forms, cards, text blocks have max-widths); not everything is full-width because the nav is.
+- [ ] Sidebars and optimal-width elements use fixed or max-widths, not grid percentages; the main area flexes.
+- [ ] Responsive sizes are set per breakpoint; large type and elements shrink more than small ones on narrow screens.
+- [ ] Component padding is tuned per size (large buttons roomier, small buttons tighter), not derived proportionally from font size.
+- [ ] Space between groups is clearly larger than space within groups (form fields, heading above vs below, list items, horizontal groups).

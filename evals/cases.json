@@ -12,7 +12,11 @@
       "[ch2] Exactly one solid primary action per view; secondary outline/low-contrast; tertiary link-style; non-primary destructive actions not big red",
       "[ch2] Data shown without naive 'Label: value' where format/context suffices; remaining labels quieter than values",
       "[ch2] Max 2 font weights (normal + bold), none below 400; 2–3 text color levels",
-      "[ch2] No grey/opacity text on colored backgrounds"
+      "[ch2] No grey/opacity text on colored backgrounds",
+      "[ch3] Spacing values all on a non-linear scale (e.g. 4/8/12/16/24/32/48/64…); metrics.py spacing count well below baseline",
+      "[ch3] Content blocks have max-widths; nothing stretched full-width without reason",
+      "[ch3] Space between groups clearly larger than within (form fields, headings, list items)",
+      "[ch3] Sidebar/panels use fixed or max widths, not percentages; explicit sizes per breakpoint"
     ]
   },
   {
@@ -28,7 +32,11 @@
       "[ch2] Exactly one solid primary action per view; secondary outline/low-contrast; tertiary link-style; non-primary destructive actions not big red",
       "[ch2] Data shown without naive 'Label: value' where format/context suffices; remaining labels quieter than values",
       "[ch2] Max 2 font weights (normal + bold), none below 400; 2–3 text color levels",
-      "[ch2] No grey/opacity text on colored backgrounds"
+      "[ch2] No grey/opacity text on colored backgrounds",
+      "[ch3] Spacing values all on a non-linear scale (e.g. 4/8/12/16/24/32/48/64…); metrics.py spacing count well below baseline",
+      "[ch3] Content blocks have max-widths; nothing stretched full-width without reason",
+      "[ch3] Space between groups clearly larger than within (form fields, headings, list items)",
+      "[ch3] Sidebar/panels use fixed or max widths, not percentages; explicit sizes per breakpoint"
     ]
   },
   {
@@ -47,7 +55,10 @@
       "[ch2] Flags flat hierarchy (too many equal-weight elements/buttons) and fixes by de-emphasizing competitors",
       "[ch2] Flags grey text on colored backgrounds and proposes same-hue tint",
       "[ch2] Flags unnecessary 'Label: value' patterns with label-free or merged rewrites",
-      "[ch2] Flags destructive actions styled as primary outside a confirmation step"
+      "[ch2] Flags destructive actions styled as primary outside a confirmation step",
+      "[ch3] Flags uniform or ambiguous spacing that blurs grouping, with concrete within/between values",
+      "[ch3] Flags off-scale spacing and proposes a non-linear scale",
+      "[ch3] Flags stretched widths / missing max-widths"
     ]
   },
   {
@@ -71,7 +82,11 @@
       "[ch2] Flags grey text on colored backgrounds and proposes same-hue tint",
       "[ch2] Flags unnecessary 'Label: value' patterns with label-free or merged rewrites",
       "[ch2] Flags destructive actions styled as primary outside a confirmation step",
-      "[ch2] signup-fixed.html meets the ch2 generate items"
+      "[ch2] signup-fixed.html meets the ch2 generate items",
+      "[ch3] Flags uniform or ambiguous spacing that blurs grouping, with concrete within/between values",
+      "[ch3] Flags off-scale spacing and proposes a non-linear scale",
+      "[ch3] Flags stretched widths / missing max-widths",
+      "[ch3] signup-fixed.html meets the ch3 generate items"
     ]
   },
   {
@@ -91,7 +106,10 @@
       "[ch2] Flags flat hierarchy (too many equal-weight elements/buttons) and fixes by de-emphasizing competitors",
       "[ch2] Flags grey text on colored backgrounds and proposes same-hue tint",
       "[ch2] Flags unnecessary 'Label: value' patterns with label-free or merged rewrites",
-      "[ch2] Flags destructive actions styled as primary outside a confirmation step"
+      "[ch2] Flags destructive actions styled as primary outside a confirmation step",
+      "[ch3] Flags uniform or ambiguous spacing that blurs grouping, with concrete within/between values",
+      "[ch3] Flags off-scale spacing and proposes a non-linear scale",
+      "[ch3] Flags stretched widths / missing max-widths"
     ]
   }
 ]

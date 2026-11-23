@@ -8,7 +8,7 @@ Used to score critique runs: count how many planted issues each run catches. Nev
 | 1 | Grey text (`#9ca3af`) on the indigo banner: low contrast, should be a lighter tint of the background hue | hierarchy (ch2) |
 | 2 | Heading line-height 1.6, same as body; large text needs tighter line-height | typography |
 | 3 | Banner subtitle has no max-width: very long line length | typography |
-| 4 | Spacing inside groups = spacing between groups (24px everywhere): grouping is ambiguous | layout & spacing |
+| 4 | Spacing inside groups = spacing between groups (24px everywhere): grouping is ambiguous | layout & spacing (ch3) |
 | 5 | Borders used for every separation (card border + header divider + per-row dividers + table rows) | depth / layout |
 | 6 | "Label: value" pairs (Email:, Role:, Status:) where the format makes labels unnecessary | hierarchy (ch2) |
 | 7 | Two filled buttons per card with equal weight; "Remove" (destructive) styled as a neutral filled button | hierarchy (ch2) |
