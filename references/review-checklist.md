@@ -7,6 +7,7 @@
 - Typography (ch.4)
 - Color (ch.5)
 - Depth (ch.6)
+- Images (ch.7)
 
 Each item is a yes/no check. A "no" names the reference file to consult for the fix.
 
@@ -69,3 +70,11 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 - [ ] Flat designs still show depth via lighter = closer / darker = inset, or solid zero-blur shadows.
 - [ ] Layering via overlap is used where it helps; overlapping images have a background-colored gap.
 - [ ] Effects are restrained; no photorealistic or stacked decorative shadows.
+
+## Images → `images.md`
+- [ ] Photos are high quality and fit the design; missing photography is an explicit, correctly-sized placeholder, not an amateur stand-in.
+- [ ] Text over images has consistent contrast (overlay, lowered contrast, colorize, or glow text-shadow) and meets WCAG over the busiest region.
+- [ ] Icons are shown near their intended size; large icon slots use a small icon inside a background shape.
+- [ ] Screenshots aren't shrunk into illegibility (smaller viewport, partial crop, or simplified illustration).
+- [ ] Logos/icons aren't shrunk from large artwork; small sizes use simplified versions.
+- [ ] User-uploaded images sit in fixed containers with `object-fit: cover` and a subtle inner shadow/border against background bleed.

@@ -26,7 +26,8 @@
       "[ch5] No meaning conveyed by color alone (icons/text alongside)",
       "[fix] Personality line present as a comment at the top of the file",
       "[ch6] Shadows from a ≤5-level elevation scale assigned by z-position; fewer distinct shadow declarations than v0.5.1",
-      "[ch6] Buttons/inputs use raised/inset light cues or flat depth consistently; pressed state lowers elevation"
+      "[ch6] Buttons/inputs use raised/inset light cues or flat depth consistently; pressed state lowers elevation",
+      "[ch7] Icons near intended size (large slots use icon-in-shape); avatars/user images in fixed containers with object-fit: cover and an inner shadow"
     ]
   },
   {
@@ -56,7 +57,8 @@
       "[ch5] No meaning conveyed by color alone (icons/text alongside)",
       "[fix] Personality line present as a comment at the top of the file",
       "[ch6] Shadows from a ≤5-level elevation scale assigned by z-position; fewer distinct shadow declarations than v0.5.1",
-      "[ch6] Buttons/inputs use raised/inset light cues or flat depth consistently; pressed state lowers elevation"
+      "[ch6] Buttons/inputs use raised/inset light cues or flat depth consistently; pressed state lowers elevation",
+      "[ch7] Icons near intended size (large slots use icon-in-shape); avatars/user images in fixed containers with object-fit: cover and an inner shadow"
     ]
   },
   {
@@ -87,7 +89,8 @@
       "[ch5] Flags contrast failures with ratios and fixes that keep color (flip contrast / rotate hue)",
       "[fix] Ends with a short 'Beyond visual design' section for blocking a11y/functional issues",
       "[ch6] Flags heavy/hard shadows and proposes an elevation scale with uses per level",
-      "[ch6] Flags depth that doesn't match importance (e.g. everything boxed or floating)"
+      "[ch6] Flags depth that doesn't match importance (e.g. everything boxed or floating)",
+      "[ch7] Flags scaled-up icon glyphs and proposes icon-in-shape at intended size"
     ]
   },
   {
@@ -128,7 +131,8 @@
       "[fix] signup-fixed.html has the personality comment",
       "[ch6] Flags heavy/hard shadows and proposes an elevation scale with uses per level",
       "[ch6] Flags depth that doesn't match importance (e.g. everything boxed or floating)",
-      "[ch6] signup-fixed.html meets the ch6 generate items"
+      "[ch6] signup-fixed.html meets the ch6 generate items",
+      "[ch7] Flags scaled-up icon glyphs and proposes icon-in-shape at intended size"
     ]
   },
   {
@@ -160,7 +164,8 @@
       "[ch5] Flags contrast failures with ratios and fixes that keep color (flip contrast / rotate hue)",
       "[fix] Ends with a short 'Beyond visual design' section for blocking a11y/functional issues",
       "[ch6] Flags heavy/hard shadows and proposes an elevation scale with uses per level",
-      "[ch6] Flags depth that doesn't match importance (e.g. everything boxed or floating)"
+      "[ch6] Flags depth that doesn't match importance (e.g. everything boxed or floating)",
+      "[ch7] Flags scaled-up icon glyphs and proposes icon-in-shape at intended size"
     ]
   }
 ]

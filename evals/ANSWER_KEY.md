@@ -18,7 +18,7 @@ Used to score critique runs: count how many planted issues each run catches. Nev
 | 11 | Mixed personality: playful copy ("Woohoo! 🎉") in a formal admin tool | process (ch1) |
 | 12 | Near-duplicate values: font sizes 13/14/15/16, two different greys (`#6b7280`, `#6c757d`) from different palettes | process (ch1) + color (ch5) |
 | 13 | Long centered paragraph (intro) | typography (ch4) |
-| 14 | Icon scaled up to 40px as a font glyph (blurry/clunky); weak empty state | images / finishing |
+| 14 | Icon scaled up to 40px as a font glyph (blurry/clunky); weak empty state | images (ch7) / finishing |
 | 15 | Numeric columns left-aligned | typography (ch4) |
 | 16 | Table header (15px) larger than its cells (14px) but no other emphasis cue; flat hierarchy | hierarchy (ch2) |
 

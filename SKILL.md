@@ -38,6 +38,7 @@ Read only the files the task needs. Each file lists its contents at the top.
 | Typography: type scale, fonts, line length, line height, baseline alignment, links, alignment, letter-spacing | `references/typography.md` |
 | Color: OKLCH, palette size, shade scales, saturation, hue rotation, tinted greys, contrast, color-blindness | `references/color.md` |
 | Depth: light source, elevation/shadow scale, two-part shadows, interaction, flat depth, overlap | `references/depth.md` |
+| Images: photo quality, text on images, icon/screenshot/logo sizing, user-uploaded images | `references/images.md` |
 <!-- rows added per chapter -->
 
 ## Core principles
