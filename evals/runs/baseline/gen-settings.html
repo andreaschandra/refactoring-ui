@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Account Settings</title>
+<style>
+  :root {
+    --bg: #f6f5f2;
+    --surface: #ffffff;
+    --surface-2: #f1efea;
+    --text: #1c1b19;
+    --muted: #6b6862;
+    --border: #e2dfd8;
+    --accent: #2f5d50;
+    --accent-hover: #244a40;
+    --accent-soft: #e3ece8;
+    --danger: #b3261e;
+    --danger-hover: #8f1d17;
+    --danger-soft: #fbeceb;
+    --focus: #3b7a68;
+    --ok: #2e7d32;
+    --warn: #b26a00;
+    --radius: 10px;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 2px 8px rgba(0,0,0,.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141413;
+      --surface: #1d1c1a;
+      --surface-2: #262522;
+      --text: #ecebe7;
+      --muted: #a19e96;
+      --border: #34322e;
+      --accent: #6fb39c;
+      --accent-hover: #86c4af;
+      --accent-soft: #22322d;
+      --danger: #f2756c;
+      --danger-hover: #f7958e;
+      --danger-soft: #2e1c1a;
+      --focus: #86c4af;
+      --ok: #7cc47f;
+      --warn: #e0a64a;
+      --shadow: none;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+  }
+  a { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  .layout {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+  }
+  header.page { grid-column: 1 / -1; }
+  header.page h1 { margin: 0 0 4px; font-size: 26px; letter-spacing: -.01em; }
+  header.page p { margin: 0; color: var(--muted); }
+
+  nav.side { position: sticky; top: 24px; align-self: start; }
+  nav.side ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  nav.side a {
+    display: block; padding: 8px 12px; border-radius: 8px;
+    color: var(--muted); text-decoration: none; font-weight: 500;
+  }
+  nav.side a:hover { background: var(--surface-2); color: var(--text); }
+  nav.side a.active { background: var(--accent-soft); color: var(--accent); }
+  nav.side a.danger-link.active { background: var(--danger-soft); color: var(--danger); }
+
+  main { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    scroll-margin-top: 24px;
+  }
+  .card-head { padding: 20px 24px 0; }
+  .card-head h2 { margin: 0; font-size: 17px; }
+  .card-head p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+  .card-body { padding: 20px 24px; display: flex; flex-direction: column; gap: 18px; }
+  .card-foot {
+    padding: 14px 24px; border-top: 1px solid var(--border);
+    background: var(--surface-2); border-radius: 0 0 var(--radius) var(--radius);
+    display: flex; justify-content: flex-end; align-items: center; gap: 12px;
+  }
+  .card-foot .hint { margin-right: auto; color: var(--muted); font-size: 13px; }
+
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  label { font-weight: 500; font-size: 14px; }
+  input[type=text], input[type=email], input[type=password] {
+    width: 100%;
+    font: inherit; color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 12px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  input:focus { outline: none; border-color: var(--focus); box-shadow: 0 0 0 3px var(--accent-soft); }
+  input[aria-invalid=true] { border-color: var(--danger); }
+  input[aria-invalid=true]:focus { box-shadow: 0 0 0 3px var(--danger-soft); }
+  .error { color: var(--danger); font-size: 13px; min-height: 0; }
+  .error:empty { display: none; }
+  .help { color: var(--muted); font-size: 13px; }
+
+  .pw-wrap { position: relative; }
+  .pw-wrap input { padding-right: 64px; }
+  .pw-toggle {
+    position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    border: 0; background: none; color: var(--muted); font: inherit; font-size: 13px;
+    padding: 4px 8px; border-radius: 6px; cursor: pointer;
+  }
+  .pw-toggle:hover { color: var(--text); background: var(--surface-2); }
+
+  .meter { display: flex; gap: 4px; margin-top: 2px; }
+  .meter span { flex: 1; height: 4px; border-radius: 2px; background: var(--border); transition: background .2s; }
+  .meter[data-score="1"] span:nth-child(-n+1) { background: var(--danger); }
+  .meter[data-score="2"] span:nth-child(-n+2) { background: var(--warn); }
+  .meter[data-score="3"] span:nth-child(-n+3) { background: var(--accent); }
+  .meter[data-score="4"] span { background: var(--ok); }
+
+  /* Avatar */
+  .avatar-row { display: flex; align-items: center; gap: 20px; }
+  .avatar {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent);
+    display: grid; place-items: center;
+    font-weight: 600; font-size: 24px;
+    overflow: hidden; flex-shrink: 0;
+    border: 1px solid var(--border);
+  }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .avatar-actions { display: flex; flex-direction: column; gap: 8px; }
+  .avatar-actions .btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Buttons */
+  .btn {
+    font: inherit; font-weight: 500; font-size: 14px;
+    border-radius: 8px; padding: 8px 14px; cursor: pointer;
+    border: 1px solid transparent;
+    transition: background .15s, border-color .15s, color .15s, opacity .15s;
+  }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+  .btn-primary { background: var(--accent); color: var(--surface); }
+  .btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+  .btn-secondary { background: var(--surface); color: var(--text); border-color: var(--border); }
+  .btn-secondary:hover:not(:disabled) { background: var(--surface-2); }
+  .btn-ghost { background: none; color: var(--muted); }
+  .btn-ghost:hover:not(:disabled) { color: var(--text); background: var(--surface-2); }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-danger:hover:not(:disabled) { background: var(--danger-hover); }
+  @media (prefers-color-scheme: dark) { .btn-danger, .btn-primary { color: #141413; } }
+
+  /* Toggles */
+  .toggle-list { list-style: none; margin: 0; padding: 0; }
+  .toggle-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .toggle-item:first-child { padding-top: 0; }
+  .toggle-item:last-child { border-bottom: 0; padding-bottom: 0; }
+  .toggle-item .title { font-weight: 500; }
+  .toggle-item .desc { color: var(--muted); font-size: 13px; }
+  .switch {
+    position: relative; flex-shrink: 0;
+    width: 40px; height: 24px; border-radius: 12px;
+    border: 0; padding: 0; cursor: pointer;
+    background: var(--border);
+    transition: background .2s;
+  }
+  .switch::after {
+    content: ""; position: absolute; top: 3px; left: 3px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.25);
+    transition: transform .2s;
+  }
+  .switch[aria-checked=true] { background: var(--accent); }
+  .switch[aria-checked=true]::after { transform: translateX(16px); }
+
+  /* Danger zone */
+  .card.danger { border-color: color-mix(in srgb, var(--danger) 45%, var(--border)); }
+  .card.danger .card-head h2 { color: var(--danger); }
+  .danger-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .danger-row .title { font-weight: 500; }
+  .danger-row .desc { color: var(--muted); font-size: 13px; }
+
+  /* Modal */
+  dialog {
+    border: 1px solid var(--border); border-radius: 12px; padding: 0;
+    background: var(--surface); color: var(--text);
+    width: min(440px, calc(100vw - 32px));
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  }
+  dialog::backdrop { background: rgba(20,20,19,.5); }
+  .modal-body { padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .modal-body h3 { margin: 0; font-size: 18px; }
+  .modal-body p { margin: 0; color: var(--muted); font-size: 14px; }
+  .modal-body ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+  .modal-foot { padding: 14px 24px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
+  code.confirm { background: var(--danger-soft); color: var(--danger); padding: 1px 6px; border-radius: 4px; font-weight: 600; }
+
+  /* Toast */
+  .toasts { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 50; }
+  .toast {
+    background: var(--text); color: var(--bg);
+    padding: 10px 16px; border-radius: 8px; font-size: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.2);
+    animation: in .2s ease-out;
+  }
+  .toast.err { background: var(--danger); color: #fff; }
+  @keyframes in { from { opacity: 0; transform: translateY(6px); } }
+
+  @media (max-width: 760px) {
+    .layout { grid-template-columns: 1fr; gap: 20px; padding: 24px 16px 60px; }
+    nav.side { position: static; overflow-x: auto; }
+    nav.side ul { flex-direction: row; }
+    nav.side a { white-space: nowrap; }
+    .row { grid-template-columns: 1fr; }
+    .card-head, .card-body { padding-left: 16px; padding-right: 16px; }
+    .card-foot { padding: 12px 16px; flex-wrap: wrap; }
+    .danger-row { flex-direction: column; align-items: flex-start; }
+    .toasts { left: 16px; right: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="layout">
+  <header class="page">
+    <h1>Settings</h1>
+    <p>Manage your profile, security and notifications.</p>
+  </header>
+
+  <nav class="side" aria-label="Settings sections">
+    <ul>
+      <li><a href="#profile" class="active">Profile</a></li>
+      <li><a href="#password">Password</a></li>
+      <li><a href="#notifications">Notifications</a></li>
+      <li><a href="#danger" class="danger-link">Danger zone</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- Profile -->
+    <section class="card" id="profile" aria-labelledby="profile-h">
+      <form id="profile-form" novalidate>
+        <div class="card-head">
+          <h2 id="profile-h">Profile</h2>
+          <p>This information is visible to people you collaborate with.</p>
+        </div>
+        <div class="card-body">
+          <div class="avatar-row">
+            <div class="avatar" id="avatar" aria-hidden="true">JD</div>
+            <div class="avatar-actions">
+              <div class="btns">
+                <label class="btn btn-secondary" for="avatar-input">Upload photo</label>
+                <input class="sr-only" type="file" id="avatar-input" accept="image/png,image/jpeg,image/webp,image/gif">
+                <button type="button" class="btn btn-ghost" id="avatar-remove" hidden>Remove</button>
+              </div>
+              <span class="help">PNG, JPG, WEBP or GIF, up to 2 MB.</span>
+              <span class="error" id="avatar-error" role="alert"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" value="Jordan Doe" autocomplete="name" required maxlength="80" aria-describedby="name-error">
+              <span class="error" id="name-error"></span>
+            </div>
+            <div class="field">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" value="jordan@example.com" autocomplete="email" required aria-describedby="email-error">
+              <span class="error" id="email-error"></span>
+            </div>
+          </div>
+        </div>
+        <div class="card-foot">
+          <span class="hint" id="profile-status"></span>
+          <button type="button" class="btn btn-ghost" id="profile-reset" disabled>Cancel</button>
+          <button type="submit" class="btn btn-primary" id="profile-save" disabled>Save changes</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Password -->
+    <section class="card" id="password" aria-labelledby="password-h">
+      <form id="password-form" novalidate>
+        <div class="card-head">
+          <h2 id="password-h">Change password</h2>
+          <p>Use at least 8 characters with a mix of letters, numbers and symbols.</p>
+        </div>
+        <div class="card-body">
+          <div class="field">
+            <label for="pw-current">Current password</label>
+            <div class="pw-wrap">
+              <input type="password" id="pw-current" autocomplete="current-password" aria-describedby="pw-current-error">
+              <button type="button" class="pw-toggle" aria-controls="pw-current">Show</button>
+            </div>
+            <span class="error" id="pw-current-error"></span>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="pw-new">New password</label>
+              <div class="pw-wrap">
+                <input type="password" id="pw-new" autocomplete="new-password" aria-describedby="pw-strength pw-new-error">
+                <button type="button" class="pw-toggle" aria-controls="pw-new">Show</button>
+              </div>
+              <div class="meter" id="pw-meter" data-score="0" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+              <span class="help" id="pw-strength" aria-live="polite"></span>
+              <span class="error" id="pw-new-error"></span>
+            </div>
+            <div class="field">
+              <label for="pw-confirm">Confirm new password</label>
+              <div class="pw-wrap">
+                <input type="password" id="pw-confirm" autocomplete="new-password" aria-describedby="pw-confirm-error">
+                <button type="button" class="pw-toggle" aria-controls="pw-confirm">Show</button>
+              </div>
+              <span class="error" id="pw-confirm-error"></span>
+            </div>
+          </div>
+        </div>
+        <div class="card-foot">
+          <span class="hint"><a href="#" id="forgot">Forgot your password?</a></span>
+          <button type="submit" class="btn btn-primary">Update password</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Notifications -->
+    <section class="card" id="notifications" aria-labelledby="notif-h">
+      <div class="card-head">
+        <h2 id="notif-h">Notifications</h2>
+        <p>Choose what we email you about. Changes save automatically.</p>
+      </div>
+      <div class="card-body">
+        <ul class="toggle-list" id="toggles">
+          <li class="toggle-item">
+            <div><div class="title" id="n1">Security alerts</div><div class="desc" id="n1d">New sign-ins and password changes.</div></div>
+            <button type="button" class="switch" role="switch" aria-checked="true" aria-labelledby="n1" aria-describedby="n1d" data-key="security"></button>
+          </li>
+          <li class="toggle-item">
+            <div><div class="title" id="n2">Comments and mentions</div><div class="desc" id="n2d">When someone replies to you or @mentions you.</div></div>
+            <button type="button" class="switch" role="switch" aria-checked="true" aria-labelledby="n2" aria-describedby="n2d" data-key="mentions"></button>
+          </li>
+          <li class="toggle-item">
+            <div><div class="title" id="n3">Weekly summary</div><div class="desc" id="n3d">A digest of activity across your projects every Monday.</div></div>
+            <button type="button" class="switch" role="switch" aria-checked="false" aria-labelledby="n3" aria-describedby="n3d" data-key="digest"></button>
+          </li>
+          <li class="toggle-item">
+            <div><div class="title" id="n4">Product updates</div><div class="desc" id="n4d">New features and improvements, about once a month.</div></div>
+            <button type="button" class="switch" role="switch" aria-checked="true" aria-labelledby="n4" aria-describedby="n4d" data-key="product"></button>
+          </li>
+          <li class="toggle-item">
+            <div><div class="title" id="n5">Tips and offers</div><div class="desc" id="n5d">Occasional tips, surveys and promotions.</div></div>
+            <button type="button" class="switch" role="switch" aria-checked="false" aria-labelledby="n5" aria-describedby="n5d" data-key="marketing"></button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Danger zone -->
+    <section class="card danger" id="danger" aria-labelledby="danger-h">
+      <div class="card-head">
+        <h2 id="danger-h">Danger zone</h2>
+        <p>Actions here are permanent and cannot be undone.</p>
+      </div>
+      <div class="card-body">
+        <div class="danger-row">
+          <div>
+            <div class="title">Delete account</div>
+            <div class="desc">Permanently remove your account, projects and all associated data.</div>
+          </div>
+          <button type="button" class="btn btn-danger" id="delete-open">Delete account</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog id="delete-dialog" aria-labelledby="del-h" aria-describedby="del-p">
+  <form method="dialog" id="delete-form">
+    <div class="modal-body">
+      <h3 id="del-h">Delete your account?</h3>
+      <p id="del-p">This will immediately and permanently delete:</p>
+      <ul>
+        <li>Your profile and sign-in details</li>
+        <li>All projects, files and comments you own</li>
+        <li>Your notification and billing history</li>
+      </ul>
+      <div class="field">
+        <label for="del-confirm">Type <code class="confirm">DELETE</code> to confirm</label>
+        <input type="text" id="del-confirm" autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn btn-secondary" id="delete-cancel">Cancel</button>
+      <button type="submit" class="btn btn-danger" id="delete-confirm" disabled>Delete permanently</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  function toast(msg, isErr = false) {
+    const el = document.createElement('div');
+    el.className = 'toast' + (isErr ? ' err' : '');
+    el.textContent = msg;
+    $('#toasts').appendChild(el);
+    setTimeout(() => el.remove(), 3200);
+  }
+
+  function setError(input, msg) {
+    const err = document.getElementById(input.id + '-error');
+    if (err) err.textContent = msg || '';
+    input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    return !msg;
+  }
+
+  // Simulated network latency
+  const fakeRequest = (ms = 600) => new Promise(r => setTimeout(r, ms));
+
+  /* ---------- Profile ---------- */
+  const profileForm = $('#profile-form');
+  const nameIn = $('#name'), emailIn = $('#email');
+  const saveBtn = $('#profile-save'), resetBtn = $('#profile-reset');
+  const avatar = $('#avatar'), avatarIn = $('#avatar-input'), avatarRemove = $('#avatar-remove');
+
+  let saved = { name: nameIn.value, email: emailIn.value, avatar: null };
+  let pendingAvatar = null;
+
+  const initials = n => n.trim().split(/\s+/).slice(0, 2).map(p => p[0] || '').join('').toUpperCase() || '?';
+
+  function renderAvatar() {
+    const src = pendingAvatar !== null ? pendingAvatar : saved.avatar;
+    avatar.innerHTML = '';
+    if (src) {
+      const img = document.createElement('img');
+      img.src = src; img.alt = '';
+      avatar.appendChild(img);
+      avatarRemove.hidden = false;
+    } else {
+      avatar.textContent = initials(nameIn.value);
+      avatarRemove.hidden = true;
+    }
+  }
+
+  function isDirty() {
+    return nameIn.value !== saved.name || emailIn.value !== saved.email ||
+           (pendingAvatar !== null && pendingAvatar !== saved.avatar);
+  }
+  function refreshDirty() {
+    const d = isDirty();
+    saveBtn.disabled = !d; resetBtn.disabled = !d;
+    $('#profile-status').textContent = d ? 'Unsaved changes' : '';
+  }
+
+  avatarIn.addEventListener('change', () => {
+    const f = avatarIn.files[0];
+    const err = $('#avatar-error');
+    err.textContent = '';
+    if (!f) return;
+    if (!f.type.startsWith('image/')) { err.textContent = 'Please choose an image file.'; avatarIn.value = ''; return; }
+    if (f.size > 2 * 1024 * 1024) { err.textContent = 'Image must be 2 MB or smaller.'; avatarIn.value = ''; return; }
+    const reader = new FileReader();
+    reader.onload = () => { pendingAvatar = reader.result; renderAvatar(); refreshDirty(); };
+    reader.readAsDataURL(f);
+    avatarIn.value = '';
+  });
+  avatarRemove.addEventListener('click', () => { pendingAvatar = ''; renderAvatar(); refreshDirty(); });
+
+  nameIn.addEventListener('input', () => { if (!avatar.querySelector('img')) renderAvatar(); setError(nameIn); refreshDirty(); });
+  emailIn.addEventListener('input', () => { setError(emailIn); refreshDirty(); });
+
+  resetBtn.addEventListener('click', () => {
+    nameIn.value = saved.name; emailIn.value = saved.email; pendingAvatar = null;
+    setError(nameIn); setError(emailIn); $('#avatar-error').textContent = '';
+    renderAvatar(); refreshDirty();
+  });
+
+  profileForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const name = nameIn.value.trim(), email = emailIn.value.trim();
+    let ok = setError(nameIn, name ? '' : 'Name is required.');
+    ok = setError(emailIn, !email ? 'Email is required.' :
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? '' : 'Enter a valid email address.') && ok;
+    if (!ok) { $('[aria-invalid=true]', profileForm).focus(); return; }
+
+    saveBtn.disabled = true; saveBtn.textContent = 'Saving…';
+    await fakeRequest();
+    const emailChanged = email !== saved.email;
+    saved = { name, email, avatar: pendingAvatar !== null ? (pendingAvatar || null) : saved.avatar };
+    nameIn.value = name; emailIn.value = email; pendingAvatar = null;
+    saveBtn.textContent = 'Save changes';
+    renderAvatar(); refreshDirty();
+    toast(emailChanged ? `Profile saved. Check ${email} to verify your new address.` : 'Profile saved.');
+  });
+
+  /* ---------- Password ---------- */
+  $$('.pw-toggle').forEach(btn => btn.addEventListener('click', () => {
+    const input = document.getElementById(btn.getAttribute('aria-controls'));
+    const show = input.type === 'password';
+    input.type = show ? 'text' : 'password';
+    btn.textContent = show ? 'Hide' : 'Show';
+    btn.setAttribute('aria-label', (show ? 'Hide' : 'Show') + ' password');
+  }));
+
+  const pwCur = $('#pw-current'), pwNew = $('#pw-new'), pwConf = $('#pw-confirm');
+  const meter = $('#pw-meter'), strength = $('#pw-strength');
+  const LABELS = ['', 'Weak', 'Fair', 'Good', 'Strong'];
+
+  function score(pw) {
+    if (!pw) return 0;
+    let s = 0;
+    if (pw.length >= 8) s++;
+    if (pw.length >= 12) s++;
+    if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) s++;
+    if (/\d/.test(pw)) s++;
+    if (/[^A-Za-z0-9]/.test(pw)) s++;
+    if (pw.length < 8) return 1;
+    return Math.max(1, Math.min(4, s - 1));
+  }
+
+  pwNew.addEventListener('input', () => {
+    const s = score(pwNew.value);
+    meter.dataset.score = s;
+    strength.textContent = s ? `Strength: ${LABELS[s]}` : '';
+    setError(pwNew);
+    if (pwConf.value) setError(pwConf, pwConf.value === pwNew.value ? '' : 'Passwords do not match.');
+  });
+  pwConf.addEventListener('input', () => setError(pwConf, pwConf.value && pwConf.value !== pwNew.value ? 'Passwords do not match.' : ''));
+  pwCur.addEventListener('input', () => setError(pwCur));
+
+  $('#password-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    let ok = setError(pwCur, pwCur.value ? '' : 'Enter your current password.');
+    ok = setError(pwNew,
+      !pwNew.value ? 'Enter a new password.' :
+      pwNew.value.length < 8 ? 'Must be at least 8 characters.' :
+      score(pwNew.value) < 2 ? 'Too weak. Add numbers, symbols or mixed case.' :
+      pwNew.value === pwCur.value ? 'New password must differ from the current one.' : '') && ok;
+    ok = setError(pwConf, pwConf.value === pwNew.value ? '' : 'Passwords do not match.') && ok;
+    if (!ok) { $('#password-form [aria-invalid=true]').focus(); return; }
+
+    const btn = e.submitter || $('#password-form [type=submit]');
+    btn.disabled = true; btn.textContent = 'Updating…';
+    await fakeRequest();
+    btn.disabled = false; btn.textContent = 'Update password';
+    e.target.reset();
+    $$('.pw-toggle').forEach(b => { b.textContent = 'Show'; document.getElementById(b.getAttribute('aria-controls')).type = 'password'; });
+    meter.dataset.score = 0; strength.textContent = '';
+    toast('Password updated.');
+  });
+
+  $('#forgot').addEventListener('click', e => { e.preventDefault(); toast(`Reset link sent to ${saved.email}.`); });
+
+  /* ---------- Notifications ---------- */
+  $$('#toggles .switch').forEach(sw => sw.addEventListener('click', async () => {
+    const on = sw.getAttribute('aria-checked') !== 'true';
+    sw.setAttribute('aria-checked', String(on));
+    const label = document.getElementById(sw.getAttribute('aria-labelledby')).textContent;
+    try {
+      await fakeRequest(250);
+      toast(`${label} ${on ? 'enabled' : 'disabled'}.`);
+    } catch {
+      sw.setAttribute('aria-checked', String(!on));
+      toast(`Couldn't update ${label.toLowerCase()}.`, true);
+    }
+  }));
+
+  /* ---------- Danger zone ---------- */
+  const dlg = $('#delete-dialog'), delIn = $('#del-confirm'), delBtn = $('#delete-confirm');
+  $('#delete-open').addEventListener('click', () => {
+    delIn.value = ''; delBtn.disabled = true; delBtn.textContent = 'Delete permanently';
+    dlg.showModal(); delIn.focus();
+  });
+  $('#delete-cancel').addEventListener('click', () => dlg.close());
+  dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+  delIn.addEventListener('input', () => { delBtn.disabled = delIn.value !== 'DELETE'; });
+  $('#delete-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    if (delIn.value !== 'DELETE') return;
+    delBtn.disabled = true; delBtn.textContent = 'Deleting…';
+    await fakeRequest(900);
+    dlg.close();
+    document.querySelector('main').innerHTML =
+      '<section class="card"><div class="card-head"><h2>Account deleted</h2><p>Your account and data have been scheduled for removal. You can close this tab.</p></div><div class="card-body"></div></section>';
+    document.querySelector('nav.side').remove();
+  });
+
+  /* ---------- Nav highlighting ---------- */
+  const links = $$('nav.side a');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  $$('main > section').forEach(s => io.observe(s));
+
+  renderAvatar();
+})();
+</script>
+</body>
+</html>

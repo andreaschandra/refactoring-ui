@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing — Tandem</title>
+<meta name="description" content="Simple pricing for Tandem project management. Start free, upgrade when your team grows.">
+<style>
+  :root {
+    --bg: #f6f4ef;
+    --surface: #ffffff;
+    --ink: #1b1a17;
+    --muted: #6b675e;
+    --line: #e3dfd5;
+    --accent: #2f5d50;
+    --accent-ink: #ffffff;
+    --accent-soft: #e4eee9;
+    --highlight: #d9a441;
+    --radius: 14px;
+    --shadow: 0 1px 2px rgba(27,26,23,.04), 0 8px 24px rgba(27,26,23,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141513;
+      --surface: #1d1f1c;
+      --ink: #eeece6;
+      --muted: #a3a097;
+      --line: #2f322e;
+      --accent: #7fb8a4;
+      --accent-ink: #10201a;
+      --accent-soft: #22302b;
+      --highlight: #e2b65c;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+  /* Header */
+  header.site {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 0;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.01em; text-decoration: none; }
+  .logo-mark {
+    width: 28px; height: 28px; border-radius: 8px; background: var(--accent);
+    display: grid; place-items: center;
+  }
+  .logo-mark span { display: block; width: 12px; height: 12px; border: 2.5px solid var(--accent-ink); border-radius: 3px; transform: rotate(45deg); }
+  nav.site a { color: var(--muted); text-decoration: none; margin-left: 24px; font-size: 15px; }
+  nav.site a:hover { color: var(--ink); }
+
+  /* Hero */
+  .hero { text-align: center; padding: 56px 0 36px; }
+  .eyebrow {
+    display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 600; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.08; letter-spacing: -.02em;
+    margin: 0 auto 16px; max-width: 16ch;
+  }
+  .hero p { color: var(--muted); font-size: 18px; max-width: 52ch; margin: 0 auto; }
+
+  /* Billing toggle */
+  .billing { display: flex; justify-content: center; align-items: center; gap: 12px; margin: 36px 0 40px; flex-wrap: wrap; }
+  .seg {
+    display: inline-flex; padding: 4px; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 999px; box-shadow: var(--shadow);
+  }
+  .seg button {
+    appearance: none; border: 0; background: transparent; color: var(--muted);
+    font: inherit; font-size: 15px; font-weight: 600; padding: 9px 20px; border-radius: 999px; cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .save {
+    font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft);
+    padding: 5px 10px; border-radius: 999px;
+  }
+
+  /* Plans */
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+  .plan {
+    position: relative; display: flex; flex-direction: column;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 30px 28px 28px; box-shadow: var(--shadow);
+  }
+  .plan.featured { border: 2px solid var(--accent); padding: 29px 27px 27px; }
+  .badge {
+    position: absolute; top: -12px; left: 27px;
+    background: var(--highlight); color: #1b1a17; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 6px;
+  }
+  .plan h2 { margin: 0 0 4px; font-size: 20px; letter-spacing: -.01em; }
+  .plan .tagline { margin: 0 0 22px; color: var(--muted); font-size: 15px; min-height: 2.9em; }
+  .price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px; }
+  .price .amt {
+    font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 48px; font-weight: 600; letter-spacing: -.03em; line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .price .per { color: var(--muted); font-size: 14px; }
+  .billed { color: var(--muted); font-size: 13px; min-height: 1.4em; margin: 6px 0 22px; }
+  .cta {
+    display: block; text-align: center; text-decoration: none; font-weight: 600; font-size: 15px;
+    padding: 12px 16px; border-radius: 10px; border: 1px solid var(--line); background: transparent; color: var(--ink);
+    transition: background .15s, border-color .15s, transform .15s;
+  }
+  .cta:hover { border-color: var(--ink); }
+  .cta.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .cta.primary:hover { filter: brightness(1.07); }
+  .cta:active { transform: translateY(1px); }
+  .cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .features { list-style: none; padding: 22px 0 0; margin: 24px 0 0; border-top: 1px solid var(--line); font-size: 15px; }
+  .features .lead { color: var(--muted); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px; }
+  .features li { display: flex; gap: 10px; padding: 6px 0; }
+  .features li.item::before {
+    content: ""; flex: none; width: 16px; height: 16px; margin-top: 4px; border-radius: 50%;
+    background: var(--accent-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' fill='none' stroke='%232f5d50' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat;
+  }
+  @media (prefers-color-scheme: dark) {
+    .features li.item::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' fill='none' stroke='%237fb8a4' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+  }
+
+  .enterprise {
+    margin: 28px 0 0; padding: 20px 24px; border: 1px dashed var(--line); border-radius: var(--radius);
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+    color: var(--muted); font-size: 15px;
+  }
+  .enterprise strong { color: var(--ink); }
+  .enterprise a { font-weight: 600; color: var(--accent); text-decoration: none; }
+  .enterprise a:hover { text-decoration: underline; }
+
+  /* FAQ */
+  .faq { padding: 96px 0 40px; display: grid; grid-template-columns: 1fr 2fr; gap: 48px; }
+  .faq h2 {
+    font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 600; font-size: 34px; letter-spacing: -.02em; line-height: 1.15; margin: 0 0 12px;
+  }
+  .faq .intro p { color: var(--muted); margin: 0; }
+  .faq .intro a { color: var(--accent); font-weight: 600; }
+  details { border-bottom: 1px solid var(--line); }
+  details:first-of-type { border-top: 1px solid var(--line); }
+  summary {
+    list-style: none; cursor: pointer; padding: 20px 40px 20px 0; position: relative;
+    font-weight: 600; font-size: 17px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: ""; position: absolute; right: 8px; top: 50%; width: 10px; height: 10px; margin-top: -7px;
+    border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg);
+    transition: transform .2s, margin-top .2s;
+  }
+  details[open] summary::after { transform: rotate(-135deg); margin-top: -2px; }
+  summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+  details p { margin: 0 0 20px; color: var(--muted); max-width: 62ch; }
+
+  footer.site { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 14px; margin-top: 40px; }
+
+  @media (max-width: 900px) {
+    .plans { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .plan .tagline { min-height: 0; }
+    .faq { grid-template-columns: 1fr; gap: 24px; padding-top: 72px; }
+  }
+  @media (max-width: 560px) {
+    nav.site a:not(:last-child) { display: none; }
+    .hero { padding-top: 32px; }
+    .wrap { padding: 0 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <a class="logo" href="#"><span class="logo-mark" aria-hidden="true"><span></span></span>Tandem</a>
+      <nav class="site" aria-label="Primary">
+        <a href="#">Product</a>
+        <a href="#">Customers</a>
+        <a href="#" aria-current="page">Pricing</a>
+        <a href="#">Sign in</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <span class="eyebrow">Pricing</span>
+        <h1>Plans that grow with your team</h1>
+        <p>Start free with unlimited projects. Upgrade when you need timelines, automations, and room for everyone.</p>
+      </section>
+
+      <div class="billing">
+        <div class="seg" role="group" aria-label="Billing period">
+          <button type="button" data-period="monthly" aria-pressed="false">Monthly</button>
+          <button type="button" data-period="annual" aria-pressed="true">Annual</button>
+        </div>
+        <span class="save">Save 20% with annual</span>
+      </div>
+
+      <section class="plans" aria-label="Plans">
+        <article class="plan">
+          <h2>Free</h2>
+          <p class="tagline">For individuals and small groups getting organized.</p>
+          <div class="price"><span class="amt">$0</span><span class="per">forever</span></div>
+          <p class="billed">Up to 5 members</p>
+          <a class="cta" href="#">Get started</a>
+          <ul class="features">
+            <li class="lead">Includes</li>
+            <li class="item">Unlimited projects &amp; tasks</li>
+            <li class="item">List, board &amp; calendar views</li>
+            <li class="item">100 MB file storage</li>
+            <li class="item">7-day activity history</li>
+            <li class="item">iOS, Android &amp; desktop apps</li>
+          </ul>
+        </article>
+
+        <article class="plan featured">
+          <span class="badge">Most popular</span>
+          <h2>Pro</h2>
+          <p class="tagline">For growing teams that ship on deadlines.</p>
+          <div class="price">
+            <span class="amt" data-monthly="12" data-annual="10">$10</span>
+            <span class="per">per user / month</span>
+          </div>
+          <p class="billed" data-monthly="Billed monthly" data-annual="Billed $120 per user annually">Billed $120 per user annually</p>
+          <a class="cta primary" href="#">Start 14-day trial</a>
+          <ul class="features">
+            <li class="lead">Everything in Free, plus</li>
+            <li class="item">Unlimited members &amp; guests</li>
+            <li class="item">Timelines &amp; Gantt with dependencies</li>
+            <li class="item">250 automation runs / month</li>
+            <li class="item">Custom fields &amp; templates</li>
+            <li class="item">10 GB storage per user</li>
+            <li class="item">Unlimited activity history</li>
+          </ul>
+        </article>
+
+        <article class="plan">
+          <h2>Team</h2>
+          <p class="tagline">For departments managing work across many projects.</p>
+          <div class="price">
+            <span class="amt" data-monthly="24" data-annual="19">$19</span>
+            <span class="per">per user / month</span>
+          </div>
+          <p class="billed" data-monthly="Billed monthly" data-annual="Billed $228 per user annually">Billed $228 per user annually</p>
+          <a class="cta" href="#">Start 14-day trial</a>
+          <ul class="features">
+            <li class="lead">Everything in Pro, plus</li>
+            <li class="item">Portfolios &amp; workload view</li>
+            <li class="item">Unlimited automations</li>
+            <li class="item">Advanced permissions &amp; roles</li>
+            <li class="item">SAML SSO &amp; SCIM provisioning</li>
+            <li class="item">Reporting dashboards</li>
+            <li class="item">Priority support, 4-hour response</li>
+          </ul>
+        </article>
+      </section>
+
+      <div class="enterprise">
+        <span><strong>Need more than 500 seats?</strong> Get volume pricing, a dedicated success manager, and custom data residency.</span>
+        <a href="#">Talk to sales →</a>
+      </div>
+
+      <section class="faq" aria-labelledby="faq-title">
+        <div class="intro">
+          <h2 id="faq-title">Frequently asked questions</h2>
+          <p>Can’t find what you’re looking for? <a href="#">Contact our team</a>.</p>
+        </div>
+        <div>
+          <details>
+            <summary>Is the Free plan really free?</summary>
+            <p>Yes. The Free plan has no time limit and doesn’t require a credit card. It includes unlimited projects and tasks for up to 5 members.</p>
+          </details>
+          <details>
+            <summary>How does the 14-day trial work?</summary>
+            <p>You get full access to Pro or Team for 14 days with no card required. When the trial ends, you can pick a plan or your workspace moves to Free automatically — nothing is deleted.</p>
+          </details>
+          <details>
+            <summary>How is per-user pricing calculated?</summary>
+            <p>You pay for each member in your workspace. Guests — clients or contractors you invite to specific projects — are free and don’t count toward your seat total.</p>
+          </details>
+          <details>
+            <summary>Can I switch between monthly and annual billing?</summary>
+            <p>Anytime. Switching to annual applies the 20% discount immediately, and we credit the unused part of your current month. Switching to monthly takes effect at your next renewal.</p>
+          </details>
+          <details>
+            <summary>What happens when I add or remove members?</summary>
+            <p>New members are prorated for the rest of your billing period. Removed seats are credited toward your next invoice.</p>
+          </details>
+          <details>
+            <summary>Do you offer discounts for nonprofits or education?</summary>
+            <p>Yes — eligible nonprofits and accredited schools get 50% off Pro and Team. Contact us with proof of status to apply.</p>
+          </details>
+          <details>
+            <summary>Can I cancel anytime?</summary>
+            <p>Yes. Cancel from your billing settings and you’ll keep paid features until the end of the current period. You can export all your data as CSV or JSON at any time.</p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site">© 2026 Tandem. All prices in USD, excluding applicable taxes.</footer>
+  </div>
+
+<script>
+  (function () {
+    var buttons = document.querySelectorAll('.seg button');
+    var swaps = document.querySelectorAll('[data-monthly][data-annual]');
+
+    function setPeriod(period) {
+      buttons.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.period === period));
+      });
+      swaps.forEach(function (el) {
+        var v = el.dataset[period];
+        el.textContent = el.classList.contains('amt') ? '$' + v : v;
+      });
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () { setPeriod(b.dataset.period); });
+    });
+  })();
+</script>
+</body>
+</html>
