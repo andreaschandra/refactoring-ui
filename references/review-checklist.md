@@ -4,6 +4,7 @@
 - Process & systems (ch.1)
 - Hierarchy (ch.2)
 - Layout & spacing (ch.3)
+- Typography (ch.4)
 
 Each item is a yes/no check. A "no" names the reference file to consult for the fix.
 
@@ -12,7 +13,6 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 - [ ] In grayscale, the most important element is still the most prominent and groupings are still clear.
 - [ ] Every visible control is backed by real, in-scope behavior (no implied features, no dead actions).
 - [ ] One personality throughout: one typeface direction, one radius style, one copy tone.
-- [ ] Font sizes come from a defined scale (no near-duplicates like 13/14/15px used side by side).
 - [ ] Colors come from a defined palette; no one-off hex values.
 - [ ] Font weights, shadows, radii, border widths, and opacities each use a small fixed set.
 
@@ -37,3 +37,15 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 - [ ] Responsive sizes are set per breakpoint; large type and elements shrink more than small ones on narrow screens.
 - [ ] Component padding is tuned per size (large buttons roomier, small buttons tighter), not derived proportionally from font size.
 - [ ] Space between groups is clearly larger than space within groups (form fields, heading above vs below, list items, horizontal groups).
+
+## Typography → `typography.md`
+- [ ] Font sizes come from a hand-picked, non-linear type scale; no near-duplicates; defined in px/rem, never em.
+- [ ] UI text uses a neutral, well-crafted family (≥5 weights) or the system stack; no condensed / short x-height fonts for body or UI text.
+- [ ] Paragraphs are capped at 45–75 characters per line, even inside wide content areas.
+- [ ] Line height varies: taller for small or wide text, ~1–1.25 for large headings; not one value everywhere.
+- [ ] Mixed font sizes on one line are baseline-aligned, not centered.
+- [ ] Inline links in prose look clickable; links in link-heavy UI use subtle emphasis; ancillary links reveal on hover.
+- [ ] Text is left-aligned; only headlines and short blocks (≤2–3 lines) are centered.
+- [ ] Numbers in tables are right-aligned with tabular figures.
+- [ ] Justified text has hyphenation enabled (or isn't justified).
+- [ ] Letter-spacing is untouched except: tightened on large headings in wide-spaced families, widened on all-caps text.
