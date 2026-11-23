@@ -38,7 +38,7 @@ Each item is a yes/no check. A "no" names the reference file to consult for the 
 - [ ] Sidebars and optimal-width elements use fixed or max-widths, not grid percentages; the main area flexes.
 - [ ] Responsive sizes are set per breakpoint; large type and elements shrink more than small ones on narrow screens.
 - [ ] Component padding is tuned per size (large buttons roomier, small buttons tighter), not derived proportionally from font size.
-- [ ] Space between groups is clearly larger than space within groups (form fields, heading above vs below, list items, horizontal groups).
+- [ ] Space between groups is clearly larger than space within groups (form fields, heading above vs below, list items, horizontal groups). On-scale values still fail if the same value is used within and between groups.
 
 ## Typography → `typography.md`
 - [ ] Font sizes come from a hand-picked, non-linear type scale; no near-duplicates; defined in px/rem, never em.

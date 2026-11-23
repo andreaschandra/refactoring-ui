@@ -51,4 +51,4 @@
   - Headings: equal space above and below a heading. Fix: more space above (separating from the previous section) than below (attaching to its content).
   - Lists: space between items equals line spacing within an item. Fix: more space between items.
   - Horizontal groups (e.g. icon + label pairs, inline stats): same rule along the row.
-- One spacing value used for every gap, within and between groups alike, is itself a grouping failure.
+- One spacing value used for every gap, within and between groups alike, is itself a grouping failure. Being on the scale doesn't fix it: check the *relationship* between gaps, not just the values.
